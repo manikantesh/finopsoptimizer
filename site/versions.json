@@ -1,0 +1,11 @@
+{
+  "versions": [
+    {
+      "name": "main",
+      "url": "https://manikantesh.github.io/finopsoptimizer/",
+      "current": true
+    }
+  ],
+  "latest": "main",
+  "current": "main"
+}
