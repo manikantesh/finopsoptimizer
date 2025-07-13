@@ -2,10 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Tests](https://github.com/manikantesh/finopsoptimizer/workflows/Tests/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
-[![Security Scan](https://github.com/manikantesh/finopsoptimizer/workflows/Security%20Scan/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://manikantesh.github.io/finopsoptimizer/)
-[![Deploy Documentation](https://github.com/manikantesh/finopsoptimizer/workflows/Deploy%20Documentation/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
+[![Deploy Docs to GitHub Pages](https://github.com/manikantesh/finopsoptimizer/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/manikantesh/finopsoptimizer/actions/workflows/deploy-docs.yml)
 
 Enterprise-grade cost optimization for multi-cloud environments. Optimize costs across AWS, Azure, GCP, and Oracle Cloud with machine learning-powered insights and automated recommendations.
 
