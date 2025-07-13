@@ -22,7 +22,7 @@ pip install finops-optimizer
 Or install from source:
 
 ```bash
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 pip install -e .
 ```

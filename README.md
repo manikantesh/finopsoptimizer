@@ -2,23 +2,23 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Tests](https://github.com/manikantesh/finopsoptimizerdocs/workflows/Tests/badge.svg)](https://github.com/manikantesh/finopsoptimizerdocs)
-[![Security Scan](https://github.com/manikantesh/finopsoptimizerdocs/workflows/Security%20Scan/badge.svg)](https://github.com/manikantesh/finopsoptimizerdocs)
-[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://manikantesh.github.io/finopsoptimizerdocs/)
-[![Deploy Documentation](https://github.com/manikantesh/finopsoptimizerdocs/workflows/Deploy%20Documentation/badge.svg)](https://github.com/manikantesh/finopsoptimizerdocs)
+[![Tests](https://github.com/manikantesh/finopsoptimizer/workflows/Tests/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
+[![Security Scan](https://github.com/manikantesh/finopsoptimizer/workflows/Security%20Scan/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://manikantesh.github.io/finopsoptimizer/)
+[![Deploy Documentation](https://github.com/manikantesh/finopsoptimizer/workflows/Deploy%20Documentation/badge.svg)](https://github.com/manikantesh/finopsoptimizer)
 
 Enterprise-grade cost optimization for multi-cloud environments. Optimize costs across AWS, Azure, GCP, and Oracle Cloud with machine learning-powered insights and automated recommendations.
 
 ## 📚 Documentation & Downloads
 
 ### 📖 Documentation Versions
-- **[Latest (Main)](https://manikantesh.github.io/finopsoptimizerdocs/)** - Current development version
-- **[v1.0.0](https://manikantesh.github.io/finopsoptimizerdocs/v1.0.0/)** - Stable release
-- **[v0.2.0](https://manikantesh.github.io/finopsoptimizerdocs/v0.2.0/)** - Previous release
+- **[Latest (Main)](https://manikantesh.github.io/finopsoptimizer/)** - Current development version
+- **[v1.0.0](https://manikantesh.github.io/finopsoptimizer/v1.0.0/)** - Stable release
+- **[v0.2.0](https://manikantesh.github.io/finopsoptimizer/v0.2.0/)** - Previous release
 
 ### 📦 Download Latest Release
-- **[Source Code (tar.gz)](https://github.com/manikantesh/finopsoptimizerdocs/releases/latest/download/finops-optimizer-latest.tar.gz)**
-- **[Wheel Package (.whl)](https://github.com/manikantesh/finopsoptimizerdocs/releases/latest/download/finops-optimizer-latest.whl)**
+- **[Source Code (tar.gz)](https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.tar.gz)**
+- **[Wheel Package (.whl)](https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl)**
 
 ### 🚀 Quick Installation
 ```bash
@@ -26,10 +26,10 @@ Enterprise-grade cost optimization for multi-cloud environments. Optimize costs 
 pip install finopsoptimizer
 
 # Install from GitHub release
-pip install https://github.com/manikantesh/finopsoptimizerdocs/releases/latest/download/finops-optimizer-latest.whl
+pip install https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl
 
 # Install from source
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 pip install -e .
 ```
@@ -78,15 +78,15 @@ python cli.py report
 
 ## 📚 Documentation
 
-- **[📖 Full Documentation](https://manikantesh.github.io/finopsoptimizerdocs/)** - Complete guides and API reference
-- **[🚀 Installation Guide](https://manikantesh.github.io/finopsoptimizerdocs/installation/)** - Setup instructions
-- **[⚙️ Configuration Guide](https://manikantesh.github.io/finopsoptimizerdocs/configuration/)** - Configuration options
-- **[🎯 Tutorial](https://manikantesh.github.io/finopsoptimizerdocs/tutorial/)** - Step-by-step tutorial
-- **[🔧 CLI Reference](https://manikantesh.github.io/finopsoptimizerdocs/cli-reference/)** - Command-line interface
-- **[🌐 Web Dashboard](https://manikantesh.github.io/finopsoptimizerdocs/web-dashboard/)** - Web interface guide
-- **[🔒 Security Guide](https://manikantesh.github.io/finopsoptimizerdocs/security/)** - Security best practices
-- **[⚡ Performance Guide](https://manikantesh.github.io/finopsoptimizerdocs/performance/)** - Performance optimization
-- **[🛠️ Troubleshooting](https://manikantesh.github.io/finopsoptimizerdocs/troubleshooting/)** - Common issues and solutions
+- **[📖 Full Documentation](https://manikantesh.github.io/finopsoptimizer/)** - Complete guides and API reference
+- **[🚀 Installation Guide](https://manikantesh.github.io/finopsoptimizer/installation/)** - Setup instructions
+- **[⚙️ Configuration Guide](https://manikantesh.github.io/finopsoptimizer/configuration/)** - Configuration options
+- **[🎯 Tutorial](https://manikantesh.github.io/finopsoptimizer/tutorial/)** - Step-by-step tutorial
+- **[🔧 CLI Reference](https://manikantesh.github.io/finopsoptimizer/cli-reference/)** - Command-line interface
+- **[🌐 Web Dashboard](https://manikantesh.github.io/finopsoptimizer/web-dashboard/)** - Web interface guide
+- **[🔒 Security Guide](https://manikantesh.github.io/finopsoptimizer/security/)** - Security best practices
+- **[⚡ Performance Guide](https://manikantesh.github.io/finopsoptimizer/performance/)** - Performance optimization
+- **[🛠️ Troubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)** - Common issues and solutions
 
 ## 🌟 Key Features
 
@@ -183,13 +183,13 @@ Access at: http://localhost:5000
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](https://manikantesh.github.io/finopsoptimizerdocs/contributing/) for details.
+We welcome contributions! Please see our [Contributing Guide](https://manikantesh.github.io/finopsoptimizer/contributing/) for details.
 
 ### Development Setup
 
 ```bash
 # Clone repository
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 
 # Create virtual environment
@@ -230,9 +230,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 - **Email**: support@finopsoptimizer.com
 
 ## 🚀 Deployment
@@ -420,10 +420,10 @@ tail -f logs/finops.log
 
 ### Getting Help
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Troubleshooting Guide**: [Troubleshooting](https://manikantesh.github.io/finopsoptimizerdocs/troubleshooting/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Troubleshooting Guide**: [Troubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 
 ## 📋 Changelog
 

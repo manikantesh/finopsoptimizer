@@ -65,7 +65,7 @@ create_branch_preview() {
         
         # Update base URLs in HTML files
         find "site/${BRANCH}" -name "*.html" -exec sed -i '' \
-            "s|https://manikantesh.github.io/finopsoptimizerdocs/|https://manikantesh.github.io/finopsoptimizerdocs/${BRANCH}/|g" {} \;
+            "s|https://manikantesh.github.io/finopsoptimizer/|https://manikantesh.github.io/finopsoptimizer/${BRANCH}/|g" {} \;
         
         echo -e "${GREEN}✅ Branch preview created at: site/${BRANCH}/${NC}"
     fi

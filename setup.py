@@ -24,11 +24,11 @@ setup(
     description="A comprehensive multi-cloud cost optimization toolkit for AWS, Azure, and GCP",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/manikantesh/finopsoptimizerdocs",
+    url="https://github.com/manikantesh/finopsoptimizer",
     project_urls={
-        "Bug Tracker": "https://github.com/manikantesh/finopsoptimizerdocs/issues",
+        "Bug Tracker": "https://github.com/manikantesh/finopsoptimizer/issues",
         "Documentation": "https://docs.finopsoptimizer.com",
-        "Source Code": "https://github.com/manikantesh/finopsoptimizerdocs",
+        "Source Code": "https://github.com/manikantesh/finopsoptimizer",
     },
     packages=find_packages(),
     classifiers=[

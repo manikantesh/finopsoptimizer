@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/api-reference/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/api-reference/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/cli-reference/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/cli-reference/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/configuration/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/configuration/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/contributing/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/contributing/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/deployment/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/deployment/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/installation/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/installation/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/monitoring/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/monitoring/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/performance/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/performance/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/security/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/security/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/troubleshooting/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/troubleshooting/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/tutorial/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/tutorial/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
     <url>
-         <loc>https://manikantesh.github.io/finopsoptimizerdocs/web-dashboard/</loc>
+         <loc>https://manikantesh.github.io/finopsoptimizer/web-dashboard/</loc>
          <lastmod>2025-07-13</lastmod>
     </url>
 </urlset>

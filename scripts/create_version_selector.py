@@ -38,7 +38,7 @@ def create_version_selector():
     if current_branch not in tags:
         versions.append({
             'name': current_branch,
-            'url': f'https://manikantesh.github.io/finopsoptimizerdocs/',
+            'url': f'https://manikantesh.github.io/finopsoptimizer/',
             'current': True
         })
     
@@ -46,7 +46,7 @@ def create_version_selector():
     for tag in tags:
         versions.append({
             'name': tag,
-            'url': f'https://manikantesh.github.io/finopsoptimizerdocs/{tag}/',
+            'url': f'https://manikantesh.github.io/finopsoptimizer/{tag}/',
             'current': False
         })
     

@@ -902,4 +902,4 @@ engine = create_engine(
 
 ---
 
-**Need help with the dashboard?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need help with the dashboard?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 

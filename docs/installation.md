@@ -47,7 +47,7 @@ pip install finopsoptimizer
 
 ```bash
 # Clone repository
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 
 # Install in development mode
@@ -536,9 +536,9 @@ chmod 600 finops_config.yml
 
 ### Getting Help
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 
 ## ✅ Verification Checklist
 
@@ -564,4 +564,4 @@ After successful installation:
 
 ---
 
-**Need help?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need help?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 

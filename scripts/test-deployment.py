@@ -64,7 +64,7 @@ def create_branch_preview(branch_name):
                     shutil.copy2(item, branch_dir / item.name)
         
         # Update base URLs in HTML files
-        base_url = f"https://manikantesh.github.io/finopsoptimizerdocs/{branch_name}/"
+        base_url = f"https://manikantesh.github.io/finopsoptimizer/{branch_name}/"
         for html_file in branch_dir.rglob("*.html"):
             try:
                 with open(html_file, 'r') as f:
@@ -72,7 +72,7 @@ def create_branch_preview(branch_name):
                 
                 # Replace base URL
                 content = content.replace(
-                    'https://manikantesh.github.io/finopsoptimizerdocs/',
+                    'https://manikantesh.github.io/finopsoptimizer/',
                     base_url
                 )
                 

@@ -992,4 +992,4 @@ app.run(host='0.0.0.0', port=8000, debug=False)
 
 ---
 
-**Need more examples?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues) for specific use cases. 
+**Need more examples?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues) for specific use cases. 

@@ -65,7 +65,7 @@ jobs:
             mkdir -p site/${{ github.ref_name }}
             rsync -av --exclude "${{ github.ref_name }}" site/ site/${{ github.ref_name }}/
             # Update base URL for branch
-            find site/${{ github.ref_name }} -name "*.html" -exec sed -i 's|https://manikantesh.github.io/finopsoptimizerdocs/|https://manikantesh.github.io/finopsoptimizerdocs/${{ github.ref_name }}/|g' {} +
+            find site/${{ github.ref_name }} -name "*.html" -exec sed -i 's|https://manikantesh.github.io/finopsoptimizer/|https://manikantesh.github.io/finopsoptimizer/${{ github.ref_name }}/|g' {} +
           fi
 
       - name: Upload artifact

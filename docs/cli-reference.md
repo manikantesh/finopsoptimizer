@@ -1007,4 +1007,4 @@ python cli.py status --format yaml --output status.yml
 
 ---
 
-**Need more help?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need more help?** Check our [Tutorial Guide](tutorial.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 
