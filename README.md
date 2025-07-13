@@ -7,6 +7,29 @@
 
 Enterprise-grade cost optimization for multi-cloud environments. Optimize costs across AWS, Azure, GCP, and Oracle Cloud with machine learning-powered insights and automated recommendations.
 
+---
+
+## 📖 Documentation Versioning & Deployment
+
+- Documentation is automatically deployed to GitHub Pages on every push to the `main` branch and on every new version tag (e.g., `v1.2.0`).
+- **Version Selector:** Users can select the documentation version from the top ribbon in the docs UI.
+- **Latest docs:** [https://manikantesh.github.io/finopsoptimizer/](https://manikantesh.github.io/finopsoptimizer/)
+- **Versioned docs:** [https://manikantesh.github.io/finopsoptimizer/vX.Y.Z/](https://manikantesh.github.io/finopsoptimizer/v1.2.0/) (replace with your tag)
+
+### How to Create a New Documentation Version
+
+1. **Tag your release:**
+   ```bash
+   git tag v1.2.0
+   git push origin v1.2.0
+   ```
+2. The workflow will build and deploy the docs for that version and update the version selector automatically.
+3. Users can switch between versions using the dropdown in the docs UI.
+
+For more details, see the [Deployment Guide](https://manikantesh.github.io/finopsoptimizer/deployment/).
+
+---
+
 ## 📚 Documentation & Downloads
 
 ### 📖 Documentation Versions
