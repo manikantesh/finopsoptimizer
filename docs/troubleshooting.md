@@ -22,7 +22,7 @@ python3.8 --version
 pip install finopsoptimizer
 
 # Or install from source
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 pip install -e .
 ```
@@ -646,9 +646,9 @@ python cli.py validate-config
 
 ### 3. Emergency Contacts
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 - **Email**: support@finopsoptimizer.com
 
 ## 📋 Troubleshooting Checklist
@@ -687,15 +687,15 @@ python cli.py validate-config
 
 ### 1. Self-Service Resources
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
 - **Tutorial**: [Tutorial Guide](tutorial.md)
 - **API Reference**: [API Reference](api-reference.md)
 - **Configuration Guide**: [Configuration Guide](configuration.md)
 
 ### 2. Community Support
 
-- **GitHub Issues**: [Open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **GitHub Discussions**: [Start a discussion](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **GitHub Issues**: [Open an issue](https://github.com/manikantesh/finopsoptimizer/issues)
+- **GitHub Discussions**: [Start a discussion](https://github.com/manikantesh/finopsoptimizer/discussions)
 - **Stack Overflow**: Tag with `finopsoptimizer`
 
 ### 3. Professional Support
@@ -738,4 +738,4 @@ When reporting bugs, please include:
 
 ---
 
-**Still having issues?** Check our [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues) or [open a new issue](https://github.com/manikantesh/finopsoptimizerdocs/issues/new). 
+**Still having issues?** Check our [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues) or [open a new issue](https://github.com/manikantesh/finopsoptimizer/issues/new). 

@@ -885,4 +885,4 @@ def bulk_insert_costs(cost_data):
 
 ---
 
-**Need help with performance?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need help with performance?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 

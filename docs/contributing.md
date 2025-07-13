@@ -16,12 +16,12 @@ Thank you for your interest in contributing to FinOps Optimizer! This guide will
 
 ### 1. Fork the Repository
 
-1. Go to [FinOps Optimizer](https://github.com/manikantesh/finopsoptimizerdocs)
+1. Go to [FinOps Optimizer](https://github.com/manikantesh/finopsoptimizer)
 2. Click the "Fork" button
 3. Clone your fork locally
 
 ```bash
-git clone https://github.com/manikantesh/finopsoptimizerdocs.git
+git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 ```
 
@@ -859,8 +859,8 @@ All contributors will be recognized in:
 
 ### 1. Development Questions
 
-- **GitHub Discussions**: [Start a discussion](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
-- **GitHub Issues**: [Open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues)
+- **GitHub Discussions**: [Start a discussion](https://github.com/manikantesh/finopsoptimizer/discussions)
+- **GitHub Issues**: [Open an issue](https://github.com/manikantesh/finopsoptimizer/issues)
 - **Email**: support@finopsoptimizer.com
 
 ### 2. Mentorship
@@ -879,4 +879,4 @@ New contributors can request mentorship:
 
 ---
 
-**Ready to contribute?** Start by [forking the repository](https://github.com/manikantesh/finopsoptimizerdocs/fork) and checking out our [good first issues](https://github.com/manikantesh/finopsoptimizerdocs/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)! 
+**Ready to contribute?** Start by [forking the repository](https://github.com/manikantesh/finopsoptimizer/fork) and checking out our [good first issues](https://github.com/manikantesh/finopsoptimizer/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)! 

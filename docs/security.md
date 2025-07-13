@@ -699,4 +699,4 @@ def compliance_check():
 
 ---
 
-**Need help with security?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need help with security?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 

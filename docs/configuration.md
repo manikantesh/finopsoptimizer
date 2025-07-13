@@ -778,10 +778,10 @@ optimizer = FinOpsOptimizer(config)
 
 ### Getting Help
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 
 ---
 
-**Need help with configuration?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizerdocs/issues). 
+**Need help with configuration?** Check our [Troubleshooting Guide](troubleshooting.md) or [open an issue](https://github.com/manikantesh/finopsoptimizer/issues). 

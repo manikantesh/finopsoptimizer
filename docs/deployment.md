@@ -40,8 +40,8 @@ gh pages deploy site --branch gh-pages
 
 ### How Versioning Works
 
-1. **Main Branch**: Always deploys to `https://manikantesh.github.io/finopsoptimizerdocs/`
-2. **Releases**: Deploy to `https://manikantesh.github.io/finopsoptimizerdocs/v1.0.0/`
+1. **Main Branch**: Always deploys to `https://manikantesh.github.io/finopsoptimizer/`
+2. **Releases**: Deploy to `https://manikantesh.github.io/finopsoptimizer/v1.0.0/`
 3. **Version Selector**: Allows users to switch between versions
 
 ### Creating a New Version

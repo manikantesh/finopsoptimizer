@@ -193,13 +193,13 @@ We welcome contributions! Please see our [Contributing Guide](contributing.md) f
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/manikantesh/finopsoptimizerdocs/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/manikantesh/finopsoptimizer/blob/main/LICENSE) file for details.
 
 ## 🆘 Support
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizerdocs/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizerdocs/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizerdocs/discussions)
+- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
 - **Email**: support@finopsoptimizer.com
 
 ## 🚀 Deployment

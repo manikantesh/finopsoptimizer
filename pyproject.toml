@@ -74,10 +74,10 @@ docs = [
 finops = "cli:cli"
 
 [project.urls]
-Homepage = "https://github.com/manikantesh/finopsoptimizerdocs"
+Homepage = "https://github.com/manikantesh/finopsoptimizer"
 Documentation = "https://docs.finopsoptimizer.com"
-Repository = "https://github.com/manikantesh/finopsoptimizerdocs"
-"Bug Tracker" = "https://github.com/manikantesh/finopsoptimizerdocs/issues"
+Repository = "https://github.com/manikantesh/finopsoptimizer"
+"Bug Tracker" = "https://github.com/manikantesh/finopsoptimizer/issues"
 
 [tool.black]
 line-length = 88
