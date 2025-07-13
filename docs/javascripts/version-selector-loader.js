@@ -5,12 +5,15 @@ fetch('version-selector.html')
     const temp = document.createElement('div');
     temp.innerHTML = html;
     const selector = temp.querySelector('.version-selector');
-    if (selector) {
-      document.addEventListener('DOMContentLoaded', function() {
-        const header = document.querySelector('.md-header');
-        if (header) {
-          header.appendChild(selector);
-        }
-      });
+    function inject() {
+      const header = document.querySelector('.md-header');
+      if (header && selector && !document.querySelector('.version-selector')) {
+        header.appendChild(selector);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', inject);
+    } else {
+      inject();
     }
   }); 
