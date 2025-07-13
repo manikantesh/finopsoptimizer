@@ -1,5 +1,5 @@
 // Loader for version selector
-fetch('/finopsoptimizer/version-selector.html')
+fetch('version-selector.html')
   .then(response => response.text())
   .then(html => {
     const temp = document.createElement('div');
