@@ -9,26 +9,24 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  logo: favicon/logo.png
-  favicon: favicon/favicon-32x32.png
   language: en
   palette:
     - scheme: default
       primary: indigo
       accent: indigo
       toggle:
-        icon: material/brightness-7
+        icon: material/toggle-wifi
         name: Switch to dark mode
     - scheme: slate
       primary: indigo
       accent: indigo
       toggle:
-        icon: material/brightness-4
+        icon: material/toggle-wifi-off
         name: Switch to light mode
   features:
     - announce.dismiss
-    # - content.action.edit  # Removed to hide edit icon
-    # - content.action.view  # Removed to hide view icon
+    - content.action.edit
+    - content.action.view
     - content.code.annotate
     - content.code.copy
     - content.code.select
@@ -62,13 +60,12 @@ extra:
       link: https://linkedin.com/company/finopsoptimizer
 
 extra_css:
-  - styles.css
+  - stylesheets/extra.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/version-selector-loader.js
 
 markdown_extensions:
   - abbr
@@ -89,8 +86,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -107,16 +104,19 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slug_theme: material
+      tabs_style: material
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-  - pymdownx.tabbed
 
 plugins:
   - search
   - git-revision-date-localized:
       enable_creation_date: true
-      enable_git_follow: false
   - minify:
       minify_html: true
 
@@ -136,8 +136,10 @@ nav:
     - Monitoring: monitoring.md
   - Development:
     - Contributing: contributing.md
-    - Deployment: deployment.md
     - Troubleshooting: troubleshooting.md
+  - About:
+    - License: ../LICENSE
+    - Changelog: ../CHANGELOG.md
 
 docs_dir: docs
 site_dir: site

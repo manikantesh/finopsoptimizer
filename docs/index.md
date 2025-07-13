@@ -240,3 +240,39 @@ docker run -p 8000:8000 finopsoptimizer
 ---
 
 **FinOps Optimizer** - Enterprise-grade cost optimization for multi-cloud environments. 
+
+---
+
+## How to Fix
+
+1. **Double-check your repository URL.**  
+   - Visit: https://github.com/manikantesh/finopsoptimizer  
+   - If you get a 404 there, the repo is private, renamed, or deleted.
+
+2. **If you renamed or moved the repo:**  
+   - Update the `repo_url` in your `mkdocs.yml` to the new location.
+   - Commit and redeploy your docs.
+
+3. **If the repo is private:**  
+   - The link will 404 for anyone not logged in or without access.
+
+4. **If the repo is public and the URL is correct:**  
+   - Try a hard refresh or wait a few minutes for GitHub Pages to update.
+
+---
+
+### Example
+
+If your repo is now at `https://github.com/manikantesh/finopsoptimizer`, update your `mkdocs.yml`:
+```yaml
+repo_url: https://github.com/manikantesh/finopsoptimizer
+```
+Then redeploy your documentation.
+
+---
+
+**Summary:**  
+- The 404 is almost always due to a mismatch between the `repo_url` in your docs config and the actual repo location or permissions.
+- Double-check the URL and update your config if needed.
+
+If you provide your actual repo URL, I can update the config for you! 
