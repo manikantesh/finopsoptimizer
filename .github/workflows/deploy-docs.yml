@@ -1,0 +1,106 @@
+name: Deploy Documentation to GitHub Pages
+
+# IMPORTANT: In your repository settings, go to Settings > Pages and set Source to 'GitHub Actions'.
+# If you see the README on your Pages site, this is the cause.
+
+on:
+  push:
+    branches: [ main, develop, feature/*, test/* ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy from'
+        required: false
+        default: 'main'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-${{ github.ref_name }}"
+  cancel-in-progress: false
+
+jobs:
+  # Build docs for all versions
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs-material
+          pip install mkdocs-git-revision-date-localized-plugin
+          pip install mkdocs-minify-plugin
+          pip install pymdown-extensions
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build documentation
+        run: |
+          mkdocs build --clean
+          # Create version selector
+          python scripts/create_version_selector.py
+
+      - name: Create branch-specific site
+        run: |
+          # Create branch-specific directory structure
+          if [ "${{ github.ref_name }}" != "main" ]; then
+            mkdir -p site/${{ github.ref_name }}
+            rsync -av --exclude "${{ github.ref_name }}" site/ site/${{ github.ref_name }}/
+            # Update base URL for branch
+            find site/${{ github.ref_name }} -name "*.html" -exec sed -i 's|https://manikantesh.github.io/finopsoptimizerdocs/|https://manikantesh.github.io/finopsoptimizerdocs/${{ github.ref_name }}/|g' {} +
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+      - name: Print build summary
+        run: |
+          echo "Build complete. Site directory: ./site"
+          ls -l ./site
+
+  # Deploy to GitHub Pages (main/release/workflow_dispatch)
+  deploy:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Deploy branch preview (feature/test/develop branches)
+  deploy-preview:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref != 'refs/heads/main' && github.event_name != 'release'
+    environment:
+      name: github-pages-preview
+    steps:
+      - name: Deploy Branch Preview
+        uses: actions/deploy-pages@v4
+
+# Troubleshooting:
+# - If you see the README on your Pages site, set Pages source to GitHub Actions in repo settings.
+# - If assets (logo, CSS, favicon) are missing, ensure they are in the docs/ directory and referenced correctly in mkdocs.yml. 

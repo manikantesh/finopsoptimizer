@@ -1,0 +1,13 @@
+include README.md
+include LICENSE
+include requirements.txt
+include setup.py
+include cli.py
+include examples/*.py
+include finops/*.yml
+include finops/*.yaml
+include finops/*.json
+recursive-include docs *
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co] 

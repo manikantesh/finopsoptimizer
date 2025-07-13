@@ -1,0 +1,56 @@
+# Core dependencies
+click>=8.0.0
+pyyaml>=6.0
+pandas>=1.3.0
+numpy>=1.21.0
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Cloud provider SDKs
+boto3>=1.26.0
+botocore>=1.29.0
+azure-mgmt-compute>=29.0.0
+azure-mgmt-costmanagement>=4.0.0
+azure-mgmt-monitor>=4.0.0
+azure-identity>=1.10.0
+google-cloud-compute>=1.0.0
+google-cloud-billing>=1.0.0
+google-cloud-monitoring>=2.0.0
+google-cloud-storage>=2.0.0
+
+# Web framework and UI
+flask>=2.3.0
+flask-login>=0.6.0
+werkzeug>=2.3.0
+
+# Testing and development
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+flake8>=5.0.0
+black>=22.0.0
+isort>=5.10.0
+bandit>=1.7.0
+safety>=2.3.0
+
+# Security
+cryptography>=3.4.0
+bcrypt>=4.0.0
+
+# Performance and monitoring
+psutil>=5.9.0
+asyncio-mqtt>=0.11.0
+
+# Reporting and visualization
+jinja2>=3.1.0
+weasyprint>=59.0
+plotly>=5.0.0
+dash>=2.0.0
+
+# Additional cloud providers
+oci>=2.100.0
+
+# Development tools
+pre-commit>=2.20.0
+tox>=4.0.0 
