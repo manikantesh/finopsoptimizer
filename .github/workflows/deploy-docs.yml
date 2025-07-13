@@ -26,19 +26,15 @@ jobs:
           pip install mkdocs mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-minify-plugin
 
       - name: Build documentation
-        run: |
-          mkdocs build --clean
+        run: mkdocs build --clean
 
       - name: Generate version selector
-        run: |
-          python scripts/create_version_selector.py
+        run: python scripts/create_version_selector.py
 
       - name: Ensure .nojekyll exists
-        run: |
-          touch site/.nojekyll
+        run: touch site/.nojekyll
 
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdocs gh-deploy --force 
+        run: mkdocs gh-deploy --force 
