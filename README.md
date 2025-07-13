@@ -462,3 +462,49 @@ See [CHANGELOG.md](CHANGELOG.md) for a complete list of changes.
 **FinOps Optimizer** - Enterprise-grade cost optimization for multi-cloud environments.
 
 **⚠️ Remember**: Always follow security best practices and ensure compliance with your organization's policies when using this tool.
+
+## Installation
+
+You can install the core library:
+
+```bash
+pip install .
+```
+
+Or install with specific cloud provider support:
+
+```bash
+pip install .[aws]
+pip install .[azure]
+pip install .[gcp]
+pip install .[oracle]
+# Or all providers:
+pip install .[all]
+```
+
+## Usage
+
+Import only what you need:
+
+```python
+from finops.aws.cost_analyzer import analyze_costs
+from finops.azure.rightsizing import recommend_rightsizing
+```
+
+## Contributing & Extending
+
+- To add features for a specific cloud, work in the corresponding subpackage (e.g., `finops/aws/`).
+- To add a new provider, create a new subpackage under `finops/` and update `setup.py`.
+- See [CONTRIBUTING.md](docs/contributing.md) for more.
+
+## Publishing to PyPI
+
+To publish the package (with subpackage support) to PyPI:
+
+```bash
+python setup.py sdist bdist_wheel
+# Test upload
+python -m twine upload --repository testpypi dist/*
+# Production upload
+python -m twine upload dist/*
+```

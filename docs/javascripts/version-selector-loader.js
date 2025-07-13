@@ -1,4 +1,4 @@
-// Loader for version selector (dropdown only, styled, next to title text)
+// Loader for version selector (dropdown in nav bar, production-safe)
 function fetchVersionSelector() {
   const paths = [
     'version-selector.html',
@@ -20,15 +20,20 @@ function fetchVersionSelector() {
         const selector = temp.querySelector('.version-selector select');
         if (!selector) return;
         selector.classList.add('finops-version-dropdown');
-        // Minimal style for alignment
-        selector.style.marginLeft = '12px';
+        // Minimal style for nav bar alignment
+        selector.style.marginLeft = '16px';
         selector.style.height = '32px';
         selector.style.verticalAlign = 'middle';
+        selector.style.fontSize = '1rem';
+        selector.style.background = '#fff';
+        selector.style.border = '1px solid #ccc';
+        selector.style.borderRadius = '4px';
+        selector.style.padding = '2px 8px';
         function tryInject(attempts = 0) {
-          // Find the FinOps Optimizer title text in the nav bar
-          const titleText = document.querySelector('.md-header__title, .md-header-nav__title, .md-header .md-header__topic, .md-header__ellipsis');
-          if (titleText && selector && !document.querySelector('.finops-version-dropdown')) {
-            titleText.insertAdjacentElement('afterend', selector);
+          // Try to find the nav bar container
+          const navBar = document.querySelector('.md-header__inner') || document.querySelector('.md-header-nav');
+          if (navBar && selector && !document.querySelector('.finops-version-dropdown')) {
+            navBar.appendChild(selector);
           } else if (attempts < 50) {
             setTimeout(() => tryInject(attempts + 1), 100);
           }
