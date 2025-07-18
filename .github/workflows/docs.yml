@@ -5,16 +5,16 @@ on:
     branches:
       - main
     paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - '*.md'
+      - "docs/**"
+      - "mkdocs.yml"
+      - "*.md"
   pull_request:
     branches:
       - main
     paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - '*.md'
+      - "docs/**"
+      - "mkdocs.yml"
+      - "*.md"
   release:
     types: [published]
 
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -72,16 +72,16 @@ jobs:
           echo "Verifying MkDocs configuration..."
           mkdocs --version
           mike --version
-          
+
           echo "Checking mkdocs.yml..."
           if [ ! -f mkdocs.yml ]; then
             echo "Error: mkdocs.yml not found"
             exit 1
           fi
-          
+
           echo "Testing MkDocs build..."
           mkdocs build --clean --strict --verbose
-          
+
           echo "Cleaning up test build..."
           rm -rf site/
 
@@ -89,13 +89,13 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           echo "Deploying latest version from main branch..."
-          
+
           # Deploy latest version
-          mike deploy --push --update-aliases latest main --verbose
-          
+          mike deploy --push --update-aliases latest main
+
           # Set as default
-          mike set-default --push latest --verbose
-          
+          mike set-default --push latest
+
           echo "Latest version deployed successfully"
 
       - name: Deploy release version
@@ -104,14 +104,14 @@ jobs:
           VERSION=${{ github.event.release.tag_name }}
           # Remove 'v' prefix if present
           VERSION=${VERSION#v}
-          
+
           echo "Deploying documentation for release version: $VERSION"
           echo "Release tag: ${{ github.event.release.tag_name }}"
           echo "Release name: ${{ github.event.release.name }}"
-          
+
           # Deploy release version
-          mike deploy --push --update-aliases "$VERSION" --verbose
-          
+          mike deploy --push --update-aliases "$VERSION"
+
           echo "Release version $VERSION deployed successfully"
 
       - name: Build PR preview
@@ -135,7 +135,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -152,51 +152,51 @@ jobs:
           VERSION=${{ github.event.release.tag_name }}
           VERSION=${VERSION#v}
           RELEASE_NAME="${{ github.event.release.name }}"
-          
+
           echo "Updating versions.json for release: $VERSION"
           echo "Release name: $RELEASE_NAME"
-          
+
           # Get current versions from mike
           echo "Getting current deployed versions..."
           mike list --json > current_versions.json || echo "[]" > current_versions.json
-          
+
           # Extract title from release name
           if [[ "$RELEASE_NAME" == *" - "* ]]; then
             TITLE="$RELEASE_NAME"
           else
             TITLE="v$VERSION - $RELEASE_NAME"
           fi
-          
+
           # Create updated versions.json using Python
           python3 << 'PYTHON_EOF'
-import json
-import os
+          import json
+          import os
 
-version = os.environ.get('VERSION', '')
-title = os.environ.get('TITLE', '')
+          version = os.environ.get('VERSION', '')
+          title = os.environ.get('TITLE', '')
 
-versions_data = [
-    {
-        "version": "latest",
-        "title": "Latest (Development)",
-        "aliases": ["main", "dev"]
-    },
-    {
-        "version": version,
-        "title": title,
-        "aliases": []
-    }
-]
+          versions_data = [
+              {
+                  "version": "latest",
+                  "title": "Latest (Development)",
+                  "aliases": ["main", "dev"]
+              },
+              {
+                  "version": version,
+                  "title": title,
+                  "aliases": []
+              }
+          ]
 
-with open('versions.json', 'w') as f:
-    json.dump(versions_data, f, indent=2)
+          with open('versions.json', 'w') as f:
+              json.dump(versions_data, f, indent=2)
 
-print(f"Created versions.json with version {version}")
-PYTHON_EOF
-          
+          print(f"Created versions.json with version {version}")
+          PYTHON_EOF
+
           echo "Updated versions.json:"
           cat versions.json
-          
+
           # Commit and push if there are changes
           if ! git diff --quiet versions.json; then
             git add versions.json
