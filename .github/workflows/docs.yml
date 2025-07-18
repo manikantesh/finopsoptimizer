@@ -169,30 +169,30 @@ jobs:
           
           # Create updated versions.json using Python
           python3 << 'PYTHON_EOF'
-            import json
-            import os
+import json
+import os
 
-            version = os.environ.get('VERSION', '')
-            title = os.environ.get('TITLE', '')
+version = os.environ.get('VERSION', '')
+title = os.environ.get('TITLE', '')
 
-            versions_data = [
-                {
-                    "version": "latest",
-                    "title": "Latest (Development)",
-                    "aliases": ["main", "dev"]
-                },
-                {
-                    "version": version,
-                    "title": title,
-                    "aliases": []
-                }
-            ]
+versions_data = [
+    {
+        "version": "latest",
+        "title": "Latest (Development)",
+        "aliases": ["main", "dev"]
+    },
+    {
+        "version": version,
+        "title": title,
+        "aliases": []
+    }
+]
 
-            with open('versions.json', 'w') as f:
-                json.dump(versions_data, f, indent=2)
+with open('versions.json', 'w') as f:
+    json.dump(versions_data, f, indent=2)
 
-            print(f"Created versions.json with version {version}")
-            PYTHON_EOF
+print(f"Created versions.json with version {version}")
+PYTHON_EOF
           
           echo "Updated versions.json:"
           cat versions.json
