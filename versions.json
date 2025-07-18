@@ -1,0 +1,27 @@
+[
+  {
+    "version": "latest",
+    "title": "Latest (Main)",
+    "aliases": ["main", "dev"]
+  },
+  {
+    "version": "v2.1.0",
+    "title": "v2.1.0 - AI Agents & Real-time Dashboards",
+    "aliases": []
+  },
+  {
+    "version": "v2.0.0",
+    "title": "v2.0.0 - Multi-Cloud Support",
+    "aliases": []
+  },
+  {
+    "version": "v1.5.0",
+    "title": "v1.5.0 - Oracle Cloud Integration",
+    "aliases": []
+  },
+  {
+    "version": "v1.0.0",
+    "title": "v1.0.0 - Initial Release",
+    "aliases": []
+  }
+]
