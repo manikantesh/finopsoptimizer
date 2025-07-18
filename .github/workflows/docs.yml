@@ -8,8 +8,6 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - '*.md'
-    tags:
-      - 'v*'
   pull_request:
     branches:
       - main
@@ -17,6 +15,8 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - '*.md'
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -69,13 +69,77 @@ jobs:
           mike deploy --push --update-aliases latest main
           mike set-default --push latest
 
-      - name: Deploy tagged version
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Deploy release version
+        if: github.event_name == 'release'
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION=${{ github.event.release.tag_name }}
+          # Remove 'v' prefix if present
+          VERSION=${VERSION#v}
+          echo "Deploying documentation for release version: $VERSION"
           mike deploy --push --update-aliases $VERSION
           
       - name: Build for PR preview
         if: github.event_name == 'pull_request'
         run: |
           mkdocs build --clean --strict
+
+  update-versions-list:
+    if: github.event_name == 'release'
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install mike
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update versions.json
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          VERSION=${VERSION#v}
+          RELEASE_NAME="${{ github.event.release.name }}"
+          RELEASE_BODY="${{ github.event.release.body }}"
+          
+          # Extract first line of release body as description
+          DESCRIPTION=$(echo "$RELEASE_BODY" | head -n1 | sed 's/["\]/\\&/g')
+          
+          # If no description, use release name
+          if [ -z "$DESCRIPTION" ]; then
+            DESCRIPTION="$RELEASE_NAME"
+          fi
+          
+          # Update versions.json
+          cat > versions.json << EOF
+          [
+            {
+              "version": "latest",
+              "title": "Latest (Development)",
+              "aliases": ["main", "dev"]
+            },
+            {
+              "version": "$VERSION",
+              "title": "$VERSION - $DESCRIPTION",
+              "aliases": []
+            }
+          ]
+          EOF
+          
+          # Commit and push updated versions.json
+          git add versions.json
+          git commit -m "docs: Update versions.json for release $VERSION" || exit 0
+          git push origin main

@@ -142,6 +142,7 @@ nav:
   - Development:
     - Contributing: contributing.md
     - Deployment: deployment.md
+    - Release Management: release-management.md
     - Versioning Guide: versioning-guide.md
     - Troubleshooting: troubleshooting.md
   - Resources:
