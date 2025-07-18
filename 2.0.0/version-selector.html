@@ -1,0 +1,56 @@
+
+<div class="version-selector">
+    <label for="version-select">Version:</label>
+    <select id="version-select" onchange="changeVersion(this.value)">
+        <option value="https://manikantesh.github.io/finopsoptimizer/" selected>main</option>
+        <option value="https://manikantesh.github.io/finopsoptimizer/v1.0.0/" >v1.0.0</option>
+
+    </select>
+</div>
+
+<script>
+function changeVersion(url) {
+    if (url) {
+        window.location.href = url;
+    }
+}
+
+// Add version selector to page
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.md-header');
+    if (header) {
+        const selector = document.querySelector('.version-selector');
+        if (selector) {
+            header.appendChild(selector);
+        }
+    }
+});
+</script>
+
+<style>
+.version-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    color: var(--md-primary-fg-color);
+}
+
+.version-selector label {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.version-selector select {
+    background: transparent;
+    border: 1px solid var(--md-primary-fg-color);
+    color: var(--md-primary-fg-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.version-selector select:focus {
+    outline: none;
+    border-color: var(--md-accent-fg-color);
+}
+</style>
