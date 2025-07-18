@@ -3,122 +3,30 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://manikantesh.github.io/finopsoptimizer/)
-[![Deploy Docs to GitHub Pages](https://github.com/manikantesh/finopsoptimizer/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/manikantesh/finopsoptimizer/actions/workflows/deploy-docs.yml)
+[![Deploy Documentation](https://github.com/manikantesh/finopsoptimizer/actions/workflows/docs.yml/badge.svg)](https://github.com/manikantesh/finopsoptimizer/actions/workflows/docs.yml)
 
-Enterprise-grade cost optimization for multi-cloud environments. Optimize costs across AWS, Azure, GCP, and Oracle Cloud with machine learning-powered insights and automated recommendations.
+**AI-Powered Cost Optimization Platform with Real-Time Dashboards and Intelligent Agents for Multi-Cloud Environments**
 
----
-
-## 📖 Documentation Versioning & Deployment
-
-- Documentation is automatically deployed to GitHub Pages on every push to the `main` branch and on every new version tag (e.g., `v1.2.0`).
-- **Version Selector:** Users can select the documentation version from the top ribbon in the docs UI.
-- **Latest docs:** [https://manikantesh.github.io/finopsoptimizer/](https://manikantesh.github.io/finopsoptimizer/)
-- **Versioned docs:** [https://manikantesh.github.io/finopsoptimizer/vX.Y.Z/](https://manikantesh.github.io/finopsoptimizer/v1.2.0/) (replace with your tag)
-
-### How to Create a New Documentation Version
-
-1. **Tag your release:**
-   ```bash
-   git tag v1.2.0
-   git push origin v1.2.0
-   ```
-2. The workflow will build and deploy the docs for that version and update the version selector automatically.
-3. Users can switch between versions using the dropdown in the docs UI.
-
-For more details, see the [Deployment Guide](https://manikantesh.github.io/finopsoptimizer/deployment/).
+Transform your cloud costs with intelligent automation, real-time insights, and enterprise-grade security across AWS, Azure, GCP, and Oracle Cloud.
 
 ---
-
-## 📚 Documentation & Downloads
-
-### 📖 Documentation Versions
-- **[Latest (Main)](https://manikantesh.github.io/finopsoptimizer/)** - Current development version
-- **[v1.0.0](https://manikantesh.github.io/finopsoptimizer/v1.0.0/)** - Stable release
-- **[v0.2.0](https://manikantesh.github.io/finopsoptimizer/v0.2.0/)** - Previous release
-
-### 📦 Download Latest Release
-- **[Source Code (tar.gz)](https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.tar.gz)**
-- **[Wheel Package (.whl)](https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl)**
-
-### 🚀 Quick Installation
-
-#### For Production Use
-```bash
-# Install from PyPI (when available)
-pip install finopsoptimizer
-
-# Install from GitHub release
-pip install https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl
-```
-
-#### For Development/Local Setup
-
-**🚀 Quick Setup (Recommended)**
-```bash
-# Clone repository
-git clone https://github.com/manikantesh/finopsoptimizer.git
-cd finopsoptimizer
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Run automated setup
-python quick_start.py
-```
-
-**📋 Manual Setup**
-```bash
-# Clone repository
-git clone https://github.com/manikantesh/finopsoptimizer.git
-cd finopsoptimizer
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install in development mode
-pip install -e .
-
-# Initialize configuration
-python cli.py init
-
-# Verify installation
-python validate_setup.py
-```
-
-📖 **For detailed setup instructions, see [LOCAL_SETUP_GUIDE.md](LOCAL_SETUP_GUIDE.md)**
-
-### 🧪 Validation & Testing
-
-After installation, validate your setup:
-
-```bash
-# Run comprehensive validation
-python validate_setup.py
-
-# Test CLI functionality
-python cli.py --help
-python cli.py status
-
-# Run the comprehensive demo
-python examples/comprehensive_cost_optimization.py
-```
 
 ## 🚀 Quick Start
 
-### Installation
-
+### Automated Setup (Recommended)
 ```bash
-pip install finopsoptimizer
+# Clone the repository
+git clone https://github.com/manikantesh/finopsoptimizer.git
+cd finopsoptimizer
+
+# Run automated setup
+python quick_start.py
+
+# Validate installation
+python validate_setup.py
 ```
 
 ### Basic Usage
-
 ```python
 from finops import FinOpsOptimizer
 
@@ -133,7 +41,6 @@ print(f"Potential savings: ${results['summary']['total_potential_savings']:.2f}"
 ```
 
 ### CLI Usage
-
 ```bash
 # Initialize configuration
 python cli.py init
@@ -141,30 +48,10 @@ python cli.py init
 # Check provider status
 python cli.py status
 
-# Real-time pricing commands
-python cli.py pricing check-price --provider aws --region us-east-1 --instance-type m5.large
-python cli.py pricing add-discount --provider aws --service EC2 --discount 15
-python cli.py pricing list-discounts
-python cli.py pricing cache-stats
+# Analyze costs and generate recommendations
+python cli.py analyze
 
-# Collect 365 days of data from all providers
-python cli.py ingest --days 365
-
-# Analyze VM rightsizing opportunities (with real-time pricing)
-python cli.py rightsizing
-
-# Find and remediate unattached disks
-python cli.py cleanup-disks --dry-run
-
-# Analyze reserved instances and savings plans
-python cli.py reservations
-
-# Schedule automated optimizations
-python cli.py schedule vm-schedule --provider aws --instances "i-123,i-456" --start-time "08:00" --stop-time "18:00"
-python cli.py schedule cost-analysis --frequency daily --time "06:00"
-python cli.py schedule cleanup --resource-type unattached_disks --frequency weekly
-
-# Run complete optimization
+# Run optimization
 python cli.py optimize
 
 # Generate comprehensive report
@@ -173,168 +60,291 @@ python cli.py report
 
 ## 📚 Documentation
 
-- **[📖 Full Documentation](https://manikantesh.github.io/finopsoptimizer/)** - Complete guides and API reference
-- **[🚀 Installation Guide](https://manikantesh.github.io/finopsoptimizer/installation/)** - Setup instructions
+### 🌐 Live Documentation
+- **[📖 Latest Documentation](https://manikantesh.github.io/finopsoptimizer/)** - Always up-to-date
+- **[📋 Version 2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - AI Agents & Real-time Dashboards
+- **[📋 Version 2.0.0](https://manikantesh.github.io/finopsoptimizer/2.0.0/)** - Multi-Cloud Support
+
+### 📖 Key Documentation Pages
+- **[🚀 Installation Guide](https://manikantesh.github.io/finopsoptimizer/installation/)** - Complete setup instructions
+- **[🏠 Local Setup Guide](https://manikantesh.github.io/finopsoptimizer/local-setup/)** - Local development setup
 - **[⚙️ Configuration Guide](https://manikantesh.github.io/finopsoptimizer/configuration/)** - Configuration options
-- **[🎯 Tutorial](https://manikantesh.github.io/finopsoptimizer/tutorial/)** - Step-by-step tutorial
+- **[🤖 AI Agents](https://manikantesh.github.io/finopsoptimizer/ai-agents/)** - AI-powered optimization
+- **[📊 Real-Time Dashboards](https://manikantesh.github.io/finopsoptimizer/real-time-dashboards/)** - Interactive dashboards
 - **[🔧 CLI Reference](https://manikantesh.github.io/finopsoptimizer/cli-reference/)** - Command-line interface
-- **[🌐 Web Dashboard](https://manikantesh.github.io/finopsoptimizer/web-dashboard/)** - Web interface guide
 - **[🔒 Security Guide](https://manikantesh.github.io/finopsoptimizer/security/)** - Security best practices
-- **[⚡ Performance Guide](https://manikantesh.github.io/finopsoptimizer/performance/)** - Performance optimization
 - **[🛠️ Troubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)** - Common issues and solutions
+
+### 📋 Documentation Features
+- **Version Selector**: Switch between documentation versions using the dropdown
+- **Automatic Updates**: Documentation updates automatically with each release
+- **Mobile Responsive**: Perfect viewing on all devices
+- **Search Functionality**: Fast search across all documentation
 
 ## 🌟 Key Features
 
-### 🏗️ **Comprehensive Cost Optimization**
-- **📊 365-Day Data Ingestion**: Collect VM metrics, cost data, and resource inventory from all cloud providers
-- **🔧 AI-Powered VM Rightsizing**: ML-based analysis of VM utilization patterns with confidence scoring
-- **💽 Unattached Disk Remediation**: Automated identification and cleanup of unused storage volumes
-- **💰 Reserved Instances & Savings Plans**: Intelligent RI/SP purchase recommendations with ROI analysis
-- **⏰ Automated Scheduling**: Schedule VM start/stop, scaling operations, and optimization tasks
+### 🤖 AI-Powered Optimization
+- **Autonomous Optimization Agent**: Continuously monitors and automatically applies cost optimizations
+- **Cost Advisor Agent**: AI-powered cost consultant with natural language processing
+- **Machine Learning Models**: Advanced ML for cost forecasting and resource optimization
+- **Intelligent Automation**: Smart rightsizing, predictive scaling, and anomaly detection
 
-### ☁️ **Multi-Cloud Support**
-- **AWS**: EC2, EBS, RDS, Auto Scaling, Cost Explorer, CloudWatch
-- **Azure**: Virtual Machines, Managed Disks, VM Scale Sets, Azure Monitor
-- **GCP**: Compute Engine, Persistent Disks, Instance Groups, Cloud Monitoring
-- **Oracle Cloud**: Compute Instances, Block Volumes, Auto Scaling, Usage API
+### 📊 Real-Time Analytics
+- **Live Dashboards**: Interactive dashboards with real-time cost monitoring
+- **Executive Dashboard**: High-level cost overview for leadership
+- **Engineering Dashboard**: Technical insights for development teams
+- **Operations Dashboard**: Real-time monitoring for DevOps/SRE teams
+- **Advanced Visualizations**: D3.js-powered charts and graphs
 
-### 🤖 **Advanced Analytics**
-- **Machine Learning**: Utilization pattern analysis and predictive modeling
-- **Risk Assessment**: Confidence scoring and risk level evaluation for recommendations
-- **Cost Forecasting**: ML-powered cost prediction with optimization impact analysis
-- **Trend Analysis**: Historical cost patterns and variance detection
+### 🏗️ Enterprise Architecture
+- **Kubernetes-Native**: Full containerization with Helm charts and auto-scaling
+- **Microservices**: Event-driven architecture with message queues
+- **High Availability**: 99.9% uptime with distributed caching and load balancing
+- **Advanced Data Stack**: Apache Kafka + Flink + Redis + Elasticsearch
 
-### 🛠️ **Enterprise Features**
-- **📊 Web Dashboard**: Real-time monitoring and visualization
-- **🔒 Security**: Enterprise-grade security features with audit logging
-- **⚡ Performance**: Optimized for large-scale deployments with parallel processing
-- **🧪 Testing**: Comprehensive test suite with 90%+ coverage
-- **🚀 CI/CD**: Automated deployment pipeline with version management
+### 💾 Advanced Data Management
+- **Real-Time Processing**: Apache Kafka + Flink for streaming analytics
+- **Search & Analytics**: Elasticsearch for advanced cost data search
+- **Distributed Caching**: Redis Cluster for high-performance data access
+- **Time-Series Database**: InfluxDB for metrics and cost data storage
+
+### 🔒 Enterprise Security
+- **Identity Management**: Keycloak integration for SSO and RBAC
+- **Policy Engine**: Open Policy Agent (OPA) for fine-grained access control
+- **Secrets Management**: HashiCorp Vault for secure credential storage
+- **Audit & Compliance**: Complete audit trails and compliance reporting
+
+### 🌐 Multi-Cloud Excellence
+- **Provider Support**: AWS, Azure, GCP, Oracle Cloud with unified APIs
+- **Cost Optimization**: Rightsizing, reserved instances, spot instances, unattached resources
+- **Real-Time Pricing**: Live pricing data integration for accurate cost calculations
+- **Cross-Cloud Analytics**: Compare costs and performance across providers
 
 ## 📊 Supported Cloud Providers
 
-| Provider | Cost Analysis | Rightsizing | Autoscaling | Cost Allocation |
-|----------|---------------|-------------|-------------|-----------------|
-| AWS      | ✅            | ✅          | ✅          | ✅              |
-| Azure    | ✅            | ✅          | ✅          | ✅              |
-| GCP      | ✅            | ✅          | ✅          | ✅              |
-| Oracle   | ✅            | ✅          | ✅          | ✅              |
+| Provider | Cost Analysis | Rightsizing | Reserved Instances | Unattached Resources | Real-Time Pricing |
+|----------|---------------|-------------|-------------------|---------------------|-------------------|
+| AWS      | ✅            | ✅          | ✅                | ✅                  | ✅                |
+| Azure    | ✅            | ✅          | ✅                | ✅                  | ✅                |
+| GCP      | ✅            | ✅          | ✅                | ✅                  | ✅                |
+| Oracle   | ✅            | ✅          | ✅                | ✅                  | ✅                |
 
-## 🎯 Use Cases
+## 🛠️ Installation Options
 
-### Cost Optimization
-- Identify underutilized resources
-- Recommend rightsizing opportunities
-- Optimize autoscaling configurations
-- Allocate costs by department/project
-
-### Cost Forecasting
-- Predict future costs using ML
-- Account for optimization impact
-- Provide confidence intervals
-- Generate trend analysis
-
-### Reporting
-- Generate comprehensive reports
-- Export to HTML, PDF, JSON
-- Interactive visualizations
-- Scheduled report generation
-
-### Monitoring
-- Real-time cost monitoring
-- Health checks and alerts
-- Performance metrics
-- Security audit logging
-
-## 🔒 Security Features
-
-- **Data Encryption**: AES-256 encryption for sensitive data
-- **Authentication**: Secure login system
-- **Rate Limiting**: API protection against abuse
-- **Audit Logging**: Complete security event tracking
-- **Input Validation**: Protection against injection attacks
-
-## ⚡ Performance Features
-
-- **Caching**: Intelligent caching with TTL
-- **Parallel Processing**: Concurrent cloud provider operations
-- **Batch Processing**: Large dataset handling
-- **Memory Optimization**: Automatic garbage collection
-
-## 🧪 Testing
-
+### Option 1: Automated Setup (Recommended)
 ```bash
-# Run all tests
-pytest tests/
-
-# Run with coverage
-pytest tests/ --cov=finops --cov-report=html
-
-# Run specific test
-pytest tests/test_core.py -v
+git clone https://github.com/manikantesh/finopsoptimizer.git
+cd finopsoptimizer
+python quick_start.py
 ```
 
-## 🌐 Web Dashboard
-
-Start the web dashboard:
-
-```bash
-python -m web.app
-```
-
-Access at: http://localhost:5000
-- Username: `admin`
-- Password: `admin123`
-
-## 📈 Performance Metrics
-
-- **Cache Hit Rate**: 75-85% average
-- **Response Time**: 200-500ms for cached operations
-- **Memory Usage**: 50-100MB typical usage
-- **Concurrent Users**: Support for 10-50 users
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](https://manikantesh.github.io/finopsoptimizer/contributing/) for details.
-
-### Development Setup
-
+### Option 2: Manual Setup
 ```bash
 # Clone repository
 git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 
 # Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv finops-env
+source finops-env/bin/activate  # On Windows: finops-env\Scripts\activate
 
-# Install development dependencies
-pip install -r requirements-dev.txt
+# Install dependencies
+pip install -r requirements.txt
 
-# Install in development mode
+# Create configuration
+python quick_start.py --config-only
+
+# Validate setup
+python validate_setup.py
+```
+
+### Option 3: Development Setup
+```bash
+# Clone and setup for development
+git clone https://github.com/manikantesh/finopsoptimizer.git
+cd finopsoptimizer
+
+# Install with development dependencies
 pip install -e .
+pip install pytest pytest-cov black flake8 mypy
 
 # Run tests
 pytest tests/
 ```
 
-### Code Style
+## 🧪 Validation & Testing
 
-We use:
+After installation, validate your setup:
+
+```bash
+# Comprehensive validation
+python validate_setup.py --full
+
+# Quick validation
+python validate_setup.py
+
+# Test basic functionality
+python test_finops.py
+
+# Test CLI functionality
+python cli.py --help
+python cli.py status
+```
+
+## ⚙️ Configuration
+
+### Quick Configuration
+```bash
+# Create default configuration
+python quick_start.py --config-only
+
+# Or use CLI
+python cli.py init
+```
+
+### Cloud Provider Setup
+```bash
+# AWS
+aws configure
+
+# Azure
+az login
+
+# Google Cloud
+gcloud auth application-default login
+
+# Oracle Cloud
+oci setup config
+```
+
+For detailed configuration instructions, see the [Configuration Guide](https://manikantesh.github.io/finopsoptimizer/configuration/).
+
+## 🎯 Use Cases
+
+### Cost Optimization
+- **VM Rightsizing**: AI-powered instance size recommendations
+- **Reserved Instances**: Automated RI analysis and purchase recommendations
+- **Unattached Resources**: Identify and clean up unused storage volumes
+- **Spot Instances**: Optimize workloads for spot instance usage
+
+### Real-Time Monitoring
+- **Live Dashboards**: Monitor costs in real-time across all providers
+- **Anomaly Detection**: AI-powered detection of unusual spending patterns
+- **Budget Tracking**: Track spending against budgets with alerts
+- **Trend Analysis**: Historical cost analysis and forecasting
+
+### Automation & Intelligence
+- **Autonomous Agents**: AI agents that optimize costs automatically
+- **Predictive Scaling**: Forecast demand and pre-scale resources
+- **Intelligent Alerts**: Smart notifications based on spending patterns
+- **Natural Language Queries**: Ask questions about costs in plain English
+
+## 🚀 Technology Stack
+
+### Core Platform
+- **Backend**: Python with FastAPI and WebSocket support
+- **Frontend**: React + D3.js for interactive visualizations
+- **Container Platform**: Kubernetes with Helm charts
+- **Service Mesh**: Istio for traffic management and security
+
+### Data & Analytics
+- **Streaming**: Apache Kafka + Apache Flink
+- **Search**: Elasticsearch + Kibana
+- **Time-Series**: InfluxDB for metrics storage
+- **Cache**: Redis Cluster for high-performance access
+- **Object Storage**: MinIO (S3-compatible)
+
+### AI & Machine Learning
+- **Agent Framework**: LangChain + Ollama for local AI deployment
+- **ML Pipeline**: Apache Airflow for orchestration
+- **Model Management**: MLflow for experiment tracking
+- **Vector Database**: Chroma for cost optimization knowledge
+
+### Security & Operations
+- **Identity**: Keycloak for SSO and RBAC
+- **Policy Engine**: Open Policy Agent (OPA)
+- **Secrets**: HashiCorp Vault
+- **Monitoring**: Prometheus + Grafana + Jaeger
+
+## 📋 Documentation Versioning
+
+### How Versioning Works
+- **Latest**: Always reflects the main branch (development)
+- **Versioned Releases**: Each GitHub release creates a documentation version
+- **Version Selector**: Switch between versions using the dropdown in documentation
+- **Automatic Deployment**: Documentation updates automatically with each release
+
+### Creating New Versions
+```bash
+# Create a new release (triggers automatic documentation deployment)
+git tag -a v2.2.0 -m "Release v2.2.0: New Features"
+git push origin v2.2.0
+
+# Or use the release helper script
+./scripts/create-release.sh -v 2.2.0 -t "Enhanced AI Features"
+```
+
+### Available Versions
+- **[Latest](https://manikantesh.github.io/finopsoptimizer/)** - Development version
+- **[v2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - AI Agents & Real-time Dashboards
+- **[v2.0.0](https://manikantesh.github.io/finopsoptimizer/2.0.0/)** - Multi-Cloud Support
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how to get started:
+
+### Development Setup
+```bash
+# Fork and clone the repository
+git clone https://github.com/your-username/finopsoptimizer.git
+cd finopsoptimizer
+
+# Set up development environment
+python -m venv dev-env
+source dev-env/bin/activate
+
+# Install development dependencies
+pip install -e .
+pip install pytest pytest-cov black flake8 mypy
+
+# Run tests
+pytest tests/
+```
+
+### Code Standards
 - **Black** for code formatting
 - **isort** for import sorting
 - **flake8** for linting
 - **mypy** for type checking
+- **pytest** for testing
 
-```bash
-# Format code
-black finops/
-isort finops/
+### Contributing Process
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Run the test suite
+6. Submit a pull request
 
-# Lint code
-flake8 finops/
-mypy finops/
-```
+For detailed contributing guidelines, see the [Contributing Guide](https://manikantesh.github.io/finopsoptimizer/contributing/).
+
+## 🔒 Security
+
+### Security Features
+- **Data Encryption**: AES-256 encryption for sensitive data
+- **Authentication**: Secure authentication with multiple providers
+- **Rate Limiting**: API protection against abuse
+- **Audit Logging**: Complete audit trails for all actions
+- **Input Validation**: Protection against injection attacks
+
+### Security Best Practices
+- Use least-privilege IAM roles
+- Regularly rotate access keys
+- Enable audit logging
+- Use HTTPS/TLS encryption
+- Implement proper access controls
+
+For detailed security information, see the [Security Guide](https://manikantesh.github.io/finopsoptimizer/security/).
 
 ## 📄 License
 
@@ -342,260 +352,72 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
-- **Email**: support@finopsoptimizer.com
+### Getting Help
+- **📖 Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
+- **🐛 Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
+- **📧 Email**: support@finopsoptimizer.com
 
-## 🚀 Deployment
+### Troubleshooting
+1. **Check Documentation**: [Troubleshooting Guide](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)
+2. **Run Validation**: `python validate_setup.py --full`
+3. **Check Logs**: Review application logs for errors
+4. **Search Issues**: Check existing GitHub issues
+5. **Create Issue**: If problem persists, create a new issue
 
-### Production Deployment
+## 🚀 Deployment Options
 
+### Local Development
 ```bash
-# Install production dependencies
-pip install finopsoptimizer[production]
-
-# Configure environment
-export FINOPS_CONFIG_PATH=/path/to/config.yml
-export FINOPS_SECRET_KEY=your-secret-key
-
-# Start web server
-gunicorn -w 4 -b 0.0.0.0:8000 web.app:app
+python quick_start.py
+python cli.py status
 ```
 
 ### Docker Deployment
-
 ```bash
-# Build image
 docker build -t finopsoptimizer .
-
-# Run container
-docker run -p 8000:8000 finopsoptimizer
+docker run -p 8080:8080 finopsoptimizer
 ```
 
-## 📊 Roadmap
-
-- [ ] Additional cloud providers (IBM Cloud, DigitalOcean)
-- [ ] Advanced ML cost forecasting
-- [ ] Real-time optimization execution
-- [ ] Mobile application
-- [ ] API Gateway with authentication
-- [ ] Kubernetes deployment templates
-
-## ⚠️ Security and Privacy
-
-### Important Security Considerations
-
-**⚠️ CRITICAL SECURITY WARNINGS:**
-
-1. **Cloud Credentials**: This tool requires access to your cloud provider APIs and billing data. Ensure you:
-   - Use least-privilege IAM roles and permissions
-   - Regularly rotate access keys and credentials
-   - Monitor API usage for unusual activity
-   - Never commit credentials to version control
-
-2. **Data Privacy**: The tool processes sensitive cost and resource data. Consider:
-   - Data retention policies
-   - Encryption at rest and in transit
-   - Access controls and audit logging
-   - Compliance with your organization's data policies
-
-3. **Network Security**: When deploying:
-   - Use HTTPS/TLS encryption
-   - Implement proper firewall rules
-   - Use VPN or private networks when possible
-   - Monitor network traffic for anomalies
-
-4. **Access Control**: Implement strong authentication:
-   - Use strong passwords or API keys
-   - Enable multi-factor authentication where possible
-   - Regularly review and update access permissions
-   - Implement session timeouts
-
-### Security Best Practices
-
-```yaml
-# Example secure configuration
-security:
-  encryption:
-    enabled: true
-    algorithm: "AES-256"
-    key_rotation: 90  # days
-  
-  authentication:
-    enabled: true
-    max_login_attempts: 5
-    session_timeout: 3600  # 1 hour
-  
-  audit:
-    enabled: true
-    log_level: "INFO"
-    log_file: "./logs/audit.log"
-```
-
-### Compliance Considerations
-
-- **GDPR**: Ensure data processing complies with GDPR requirements
-- **SOC 2**: Implement controls for SOC 2 compliance
-- **HIPAA**: Additional controls required for healthcare data
-- **PCI DSS**: Special considerations for payment data
-
-### Vulnerability Reporting
-
-If you discover a security vulnerability, please:
-
-1. **DO NOT** create a public GitHub issue
-2. **DO** email support@finopsoptimizer.com
-3. **DO** include detailed information about the vulnerability
-4. **DO** allow time for responsible disclosure
-
-## 🔧 Configuration
-
-### Basic Configuration
-
-```yaml
-# finops_config.yml
-aws:
-  enabled: true
-  region: us-east-1
-
-azure:
-  enabled: false
-
-gcp:
-  enabled: false
-
-optimization:
-  cpu_utilization_threshold: 0.7
-  memory_utilization_threshold: 0.8
-
-output_dir: "./finops_reports"
-log_level: "INFO"
-```
-
-### Environment Variables
-
+### Kubernetes Deployment
 ```bash
-# Required for production
-export FINOPS_SECRET_KEY="your-secure-secret-key"
-export FINOPS_CONFIG_PATH="/path/to/config.yml"
-
-# Cloud provider credentials (use secure methods)
-export AWS_ACCESS_KEY_ID="your-aws-access-key"
-export AWS_SECRET_ACCESS_KEY="your-aws-secret-key"
-export AZURE_CLIENT_ID="your-azure-client-id"
-export AZURE_CLIENT_SECRET="your-azure-client-secret"
-export GOOGLE_APPLICATION_CREDENTIALS="/path/to/gcp-key.json"
+helm repo add finops https://charts.finopsoptimizer.com
+helm install finops finops/finopsoptimizer
 ```
 
-## 📈 Performance Tuning
+### Cloud Deployment
+- **AWS**: EKS with Application Load Balancer
+- **Azure**: AKS with Azure Application Gateway
+- **GCP**: GKE with Google Cloud Load Balancer
+- **Oracle**: OKE with Oracle Cloud Infrastructure
 
-### Production Settings
+For detailed deployment instructions, see the [Deployment Guide](https://manikantesh.github.io/finopsoptimizer/deployment/).
 
-```yaml
-performance:
-  cache:
-    enabled: true
-    ttl: 3600  # 1 hour
-    max_size: 1000
-  
-  parallel:
-    max_workers: 8
-    timeout: 300
-  
-  memory:
-    max_usage: 0.8  # 80%
-    cleanup_threshold: 0.7
-```
+## 📈 Roadmap
 
-### Monitoring
+### Current Version (v2.1.0)
+- ✅ AI Agents for autonomous optimization
+- ✅ Real-time dashboards with interactive visualizations
+- ✅ Complete setup automation
+- ✅ Professional documentation system
 
-```bash
-# Check system health
-python cli.py health
+### Upcoming Features
+- 🔄 Version comparison in documentation
+- 🔄 Enhanced AI agent capabilities
+- 🔄 Mobile application
+- 🔄 Advanced analytics and reporting
+- 🔄 Additional cloud provider integrations
 
-# Monitor performance
-python cli.py metrics
+### Future Enhancements
+- 📋 API Gateway with authentication
+- 📋 Advanced ML models for cost prediction
+- 📋 Integration with CI/CD pipelines
+- 📋 Custom optimization rules engine
 
-# View logs
-tail -f logs/finops.log
-```
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-1. **Import Errors**: Ensure all dependencies are installed
-2. **Credential Errors**: Verify cloud provider credentials
-3. **Permission Errors**: Check IAM roles and permissions
-4. **Performance Issues**: Enable caching and optimize configuration
-
-### Getting Help
-
-- **Documentation**: [GitHub Pages](https://manikantesh.github.io/finopsoptimizer/)
-- **Troubleshooting Guide**: [Troubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)
-- **Issues**: [GitHub Issues](https://github.com/manikantesh/finopsoptimizer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/manikantesh/finopsoptimizer/discussions)
-
-## 📋 Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for a complete list of changes.
-
-## 🙏 Acknowledgments
-
-- Cloud provider SDKs and APIs
-- Open source community contributors
-- Security researchers and auditors
-- Beta testers and early adopters
+For the complete roadmap, see [Future Enhancements](https://manikantesh.github.io/finopsoptimizer/future-roadmap/).
 
 ---
 
-**FinOps Optimizer** - Enterprise-grade cost optimization for multi-cloud environments.
+**FinOps Optimizer** - Transform your cloud costs with AI-powered optimization, real-time insights, and enterprise-grade automation.
 
-**⚠️ Remember**: Always follow security best practices and ensure compliance with your organization's policies when using this tool.
-
-## Installation
-
-You can install the core library:
-
-```bash
-pip install .
-```
-
-Or install with specific cloud provider support:
-
-```bash
-pip install .[aws]
-pip install .[azure]
-pip install .[gcp]
-pip install .[oracle]
-# Or all providers:
-pip install .[all]
-```
-
-## Usage
-
-Import only what you need:
-
-```python
-from finops.aws.cost_analyzer import analyze_costs
-from finops.azure.rightsizing import recommend_rightsizing
-```
-
-## Contributing & Extending
-
-- To add features for a specific cloud, work in the corresponding subpackage (e.g., `finops/aws/`).
-- To add a new provider, create a new subpackage under `finops/` and update `setup.py`.
-- See [CONTRIBUTING.md](docs/contributing.md) for more.
-
-## Publishing to PyPI
-
-To publish the package (with subpackage support) to PyPI:
-
-```bash
-python setup.py sdist bdist_wheel
-# Test upload
-python -m twine upload --repository testpypi dist/*
-# Production upload
-python -m twine upload dist/*
-```
+**🎯 Ready to optimize your cloud costs?** Start with `python quick_start.py`!
