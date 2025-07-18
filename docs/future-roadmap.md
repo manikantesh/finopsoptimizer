@@ -3,19 +3,22 @@
 ## Overview
 This document outlines potential enhancements to transform the current FinOps platform into a comprehensive, AI-powered, real-time cost optimization solution using entirely open source technologies.
 
-## 🤖 AI Agent Integration
+## 🤖 AI Agent Integration (Future Feature)
 
 ### Intelligent Cost Optimization Agents
 - **Autonomous Rightsizing Agent**: Uses machine learning to continuously monitor and automatically resize VMs based on usage patterns
 - **Anomaly Detection Agent**: Detects unusual spending patterns and alerts stakeholders
 - **Predictive Scaling Agent**: Forecasts resource needs and pre-emptively scales infrastructure
 - **Cost Optimization Advisor**: Provides personalized recommendations based on workload analysis
+- **Natural Language Interface**: Chat-based cost analysis and recommendations
 
 ### Implementation Stack
 - **Agent Framework**: LangChain + OpenAI-compatible models (Ollama for local deployment)
 - **ML Pipeline**: Apache Airflow for orchestration, MLflow for model management
 - **Vector Database**: Chroma or Weaviate for storing cost optimization knowledge
 - **Model Serving**: TorchServe or TensorFlow Serving
+
+**Status**: 📋 Planned for future implementation
 
 ## 📊 Real-Time Dashboards & Monitoring
 

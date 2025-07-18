@@ -785,7 +785,7 @@ What actually happened.
 
 - OS: [e.g., Ubuntu 20.04]
 - Python: [e.g., 3.9.7]
-- FinOps Optimizer: [e.g., 1.0.0]
+- FinOps Optimizer: [e.g., 2.0.0]
 
 ## Additional Information
 

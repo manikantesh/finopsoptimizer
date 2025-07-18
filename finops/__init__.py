@@ -32,7 +32,7 @@ from .reserved_instances import ReservedInstanceAnalyzer
 from .pricing_engine import RealTimePricingEngine, EnterpriseDiscount
 
 # Version info
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __author__ = "FinOpsOptimizer Team"
 __email__ = "support@finopsoptimizer.com"
 

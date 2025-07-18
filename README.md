@@ -7,7 +7,7 @@
 
 **Multi-Cloud Cost Optimization Platform for AWS, Azure, GCP, and Oracle Cloud**
 
-Optimize your cloud costs with intelligent rightsizing, reserved instance analysis, and automated resource cleanup across multiple cloud providers.
+Optimize your cloud costs with rightsizing recommendations, reserved instance analysis, and automated resource cleanup across multiple cloud providers.
 
 ---
 
@@ -84,7 +84,7 @@ python cli.py report
 
 ### 🌐 Multi-Cloud Cost Optimization
 - **Provider Support**: AWS, Azure, GCP, Oracle Cloud with unified APIs
-- **VM Rightsizing**: Intelligent instance size recommendations based on utilization analysis
+- **VM Rightsizing**: Instance size recommendations based on utilization analysis
 - **Reserved Instances**: Analysis and recommendations for RI purchases with ROI calculations
 - **Unattached Resources**: Identify and clean up unused storage volumes and snapshots
 - **Real-Time Pricing**: Live pricing data integration for accurate cost calculations
@@ -277,12 +277,12 @@ git tag -a v2.2.0 -m "Release v2.2.0: New Features"
 git push origin v2.2.0
 
 # Or use the release helper script
-./scripts/create-release.sh -v 2.2.0 -t "Enhanced AI Features"
+./scripts/create-release.sh -v 2.2.0 -t "Enhanced Features"
 ```
 
 ### Available Versions
 - **[Latest](https://manikantesh.github.io/finopsoptimizer/)** - Development version
-- **[v2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - AI Agents & Real-time Dashboards
+- **[v2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - Enhanced Multi-Cloud Support
 - **[v2.0.0](https://manikantesh.github.io/finopsoptimizer/2.0.0/)** - Multi-Cloud Support
 
 ## 🤝 Contributing
@@ -392,28 +392,38 @@ For detailed deployment instructions, see the [Deployment Guide](https://manikan
 ## 📈 Roadmap
 
 ### Current Version (v2.1.0)
-- ✅ AI Agents for autonomous optimization
-- ✅ Real-time dashboards with interactive visualizations
+- ✅ Multi-cloud cost optimization (AWS, Azure, GCP, Oracle)
+- ✅ VM rightsizing recommendations
+- ✅ Reserved instance analysis
+- ✅ Unattached resource cleanup
+- ✅ Real-time pricing integration
+- ✅ Web dashboard with Flask
 - ✅ Complete setup automation
 - ✅ Professional documentation system
 
 ### Upcoming Features
 - 🔄 Version comparison in documentation
-- 🔄 Enhanced AI agent capabilities
-- 🔄 Mobile application
-- 🔄 Advanced analytics and reporting
-- 🔄 Additional cloud provider integrations
+- 🔄 Enhanced reporting capabilities
+- 🔄 Mobile-responsive improvements
+- � Additionwal cloud provider integrations
+- � Perfnormance optimizations
 
-### Future Enhancements
-- 📋 API Gateway with authentication
-- 📋 Advanced ML models for cost prediction
-- 📋 Integration with CI/CD pipelines
-- 📋 Custom optimization rules engine
+### Future Enhancements (Roadmap)
+- 📋 **AI Agents**: Autonomous optimization agents with LangChain + Ollama
+- 📋 **Real-Time Dashboards**: React + D3.js interactive dashboards
+- 📋 **Advanced Data Stack**: Apache Kafka + Flink + Redis + Elasticsearch
+- 📋 **Kubernetes-Native**: Helm charts and microservices architecture
+- 📋 **Enterprise Security**: Keycloak + OPA + HashiCorp Vault integration
+- 📋 **API Gateway**: Authentication and rate limiting
+- 📋 **Advanced ML Models**: Enhanced cost prediction and forecasting
+- 📋 **Natural Language Processing**: Chat-based cost analysis
+- 📋 **Mobile Application**: Native mobile app for cost monitoring
+- 📋 **Integration Hub**: CI/CD pipelines and ITSM tool integration
 
 For the complete roadmap, see [Future Enhancements](https://manikantesh.github.io/finopsoptimizer/future-roadmap/).
 
 ---
 
-**FinOps Optimizer** - Transform your cloud costs with AI-powered optimization, real-time insights, and enterprise-grade automation.
+**FinOps Optimizer** - Transform your cloud costs with multi-cloud optimization, rightsizing recommendations, and automated resource cleanup.
 
 **🎯 Ready to optimize your cloud costs?** Start with `python quick_start.py`!

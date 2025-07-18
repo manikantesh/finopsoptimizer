@@ -771,7 +771,7 @@ python cli.py version
 
 **Output:**
 ```
-FinOps Optimizer v1.0.0
+FinOps Optimizer v2.0.0
 Python: 3.9.7
 Platform: Linux x86_64
 Dependencies:
