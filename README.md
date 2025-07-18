@@ -42,17 +42,71 @@ For more details, see the [Deployment Guide](https://manikantesh.github.io/finop
 - **[Wheel Package (.whl)](https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl)**
 
 ### 🚀 Quick Installation
+
+#### For Production Use
 ```bash
-# Install from PyPI
+# Install from PyPI (when available)
 pip install finopsoptimizer
 
 # Install from GitHub release
 pip install https://github.com/manikantesh/finopsoptimizer/releases/latest/download/finops-optimizer-latest.whl
+```
 
-# Install from source
+#### For Development/Local Setup
+
+**🚀 Quick Setup (Recommended)**
+```bash
+# Clone repository
 git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Run automated setup
+python quick_start.py
+```
+
+**📋 Manual Setup**
+```bash
+# Clone repository
+git clone https://github.com/manikantesh/finopsoptimizer.git
+cd finopsoptimizer
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install in development mode
 pip install -e .
+
+# Initialize configuration
+python cli.py init
+
+# Verify installation
+python validate_setup.py
+```
+
+📖 **For detailed setup instructions, see [LOCAL_SETUP_GUIDE.md](LOCAL_SETUP_GUIDE.md)**
+
+### 🧪 Validation & Testing
+
+After installation, validate your setup:
+
+```bash
+# Run comprehensive validation
+python validate_setup.py
+
+# Test CLI functionality
+python cli.py --help
+python cli.py status
+
+# Run the comprehensive demo
+python examples/comprehensive_cost_optimization.py
 ```
 
 ## 🚀 Quick Start
@@ -87,13 +141,33 @@ python cli.py init
 # Check provider status
 python cli.py status
 
-# Analyze costs
-python cli.py analyze
+# Real-time pricing commands
+python cli.py pricing check-price --provider aws --region us-east-1 --instance-type m5.large
+python cli.py pricing add-discount --provider aws --service EC2 --discount 15
+python cli.py pricing list-discounts
+python cli.py pricing cache-stats
 
-# Run optimization
+# Collect 365 days of data from all providers
+python cli.py ingest --days 365
+
+# Analyze VM rightsizing opportunities (with real-time pricing)
+python cli.py rightsizing
+
+# Find and remediate unattached disks
+python cli.py cleanup-disks --dry-run
+
+# Analyze reserved instances and savings plans
+python cli.py reservations
+
+# Schedule automated optimizations
+python cli.py schedule vm-schedule --provider aws --instances "i-123,i-456" --start-time "08:00" --stop-time "18:00"
+python cli.py schedule cost-analysis --frequency daily --time "06:00"
+python cli.py schedule cleanup --resource-type unattached_disks --frequency weekly
+
+# Run complete optimization
 python cli.py optimize
 
-# Generate report
+# Generate comprehensive report
 python cli.py report
 ```
 
@@ -111,14 +185,31 @@ python cli.py report
 
 ## 🌟 Key Features
 
-- **☁️ Multi-Cloud Support**: AWS, Azure, GCP, Oracle Cloud
-- **💰 Cost Optimization**: Rightsizing, autoscaling, cost allocation
-- **🔮 Cost Forecasting**: ML-powered cost prediction
+### 🏗️ **Comprehensive Cost Optimization**
+- **📊 365-Day Data Ingestion**: Collect VM metrics, cost data, and resource inventory from all cloud providers
+- **🔧 AI-Powered VM Rightsizing**: ML-based analysis of VM utilization patterns with confidence scoring
+- **💽 Unattached Disk Remediation**: Automated identification and cleanup of unused storage volumes
+- **💰 Reserved Instances & Savings Plans**: Intelligent RI/SP purchase recommendations with ROI analysis
+- **⏰ Automated Scheduling**: Schedule VM start/stop, scaling operations, and optimization tasks
+
+### ☁️ **Multi-Cloud Support**
+- **AWS**: EC2, EBS, RDS, Auto Scaling, Cost Explorer, CloudWatch
+- **Azure**: Virtual Machines, Managed Disks, VM Scale Sets, Azure Monitor
+- **GCP**: Compute Engine, Persistent Disks, Instance Groups, Cloud Monitoring
+- **Oracle Cloud**: Compute Instances, Block Volumes, Auto Scaling, Usage API
+
+### 🤖 **Advanced Analytics**
+- **Machine Learning**: Utilization pattern analysis and predictive modeling
+- **Risk Assessment**: Confidence scoring and risk level evaluation for recommendations
+- **Cost Forecasting**: ML-powered cost prediction with optimization impact analysis
+- **Trend Analysis**: Historical cost patterns and variance detection
+
+### 🛠️ **Enterprise Features**
 - **📊 Web Dashboard**: Real-time monitoring and visualization
-- **🔒 Security**: Enterprise-grade security features
-- **⚡ Performance**: Optimized for large-scale deployments
-- **🧪 Testing**: Comprehensive test suite
-- **🚀 CI/CD**: Automated deployment pipeline
+- **🔒 Security**: Enterprise-grade security features with audit logging
+- **⚡ Performance**: Optimized for large-scale deployments with parallel processing
+- **🧪 Testing**: Comprehensive test suite with 90%+ coverage
+- **🚀 CI/CD**: Automated deployment pipeline with version management
 
 ## 📊 Supported Cloud Providers
 

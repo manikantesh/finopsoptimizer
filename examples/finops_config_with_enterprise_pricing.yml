@@ -1,0 +1,188 @@
+# FinOpsOptimizer Configuration with Enterprise Pricing
+# This configuration demonstrates how to set up real-time pricing with enterprise discounts
+
+# Cloud Provider Settings
+aws:
+  enabled: true
+  region: us-east-1
+  account_id: null
+
+azure:
+  enabled: true
+  subscription_id: null
+
+gcp:
+  enabled: true
+  project_id: null
+
+oracle:
+  enabled: true
+
+# Optimization Settings
+optimization:
+  cpu_utilization_threshold: 0.7
+  memory_utilization_threshold: 0.8
+  cost_savings_threshold: 0.1
+
+# Real-Time Pricing Configuration
+pricing:
+  # Enable real-time pricing from cloud provider APIs
+  enable_real_time_pricing: true
+  
+  # Cache settings for pricing data
+  cache_ttl: 3600  # 1 hour cache
+  
+  # Fallback to static pricing if real-time fails
+  fallback_to_static: true
+  
+  # Priority order for pricing sources
+  pricing_sources:
+    - enterprise_contract
+    - cloud_provider_api
+    - pricing_api
+    - cached
+  
+  # Enterprise Discounts Configuration
+  enterprise_discounts:
+    # AWS Enterprise Agreement - 15% discount on all services
+    - provider: aws
+      service: all
+      resource_type: all
+      discount_type: percentage
+      discount_value: 15.0
+      minimum_commitment: 100000  # $100k annual commitment
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        regions: ["us-east-1", "us-west-2", "eu-west-1"]
+        min_monthly_spend: 8333  # $100k / 12 months
+    
+    # AWS EC2 Volume Discount - Additional 10% for compute
+    - provider: aws
+      service: EC2
+      resource_type: instance
+      discount_type: percentage
+      discount_value: 10.0
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        instance_families: ["m5", "c5", "r5"]
+    
+    # Azure Enterprise Agreement - 20% discount on VMs
+    - provider: azure
+      service: Virtual Machines
+      resource_type: vm
+      discount_type: percentage
+      discount_value: 20.0
+      minimum_commitment: 50000  # $50k annual commitment
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        vm_families: ["Standard_D", "Standard_E", "Standard_F"]
+    
+    # Azure Storage Discount - Fixed rate for premium storage
+    - provider: azure
+      service: Storage
+      resource_type: disk
+      discount_type: percentage
+      discount_value: 15.0
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        storage_types: ["Premium_LRS", "Premium_ZRS"]
+    
+    # GCP Committed Use Discount - 25% for sustained usage
+    - provider: gcp
+      service: Compute Engine
+      resource_type: instance
+      discount_type: percentage
+      discount_value: 25.0
+      minimum_commitment: 75000  # $75k annual commitment
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        machine_families: ["n1", "n2", "c2"]
+        commitment_term: "1_year"
+    
+    # Oracle Cloud Universal Credits - 30% discount
+    - provider: oracle
+      service: all
+      resource_type: all
+      discount_type: percentage
+      discount_value: 30.0
+      minimum_commitment: 60000  # $60k annual commitment
+      valid_from: "2024-01-01T00:00:00"
+      valid_until: "2024-12-31T23:59:59"
+      conditions:
+        universal_credits: true
+        flex_compute: true
+  
+  # Custom Pricing Rates (override specific instance types)
+  custom_rates:
+    # AWS Custom Rates (per hour)
+    "aws:us-east-1:t3.nano": 0.004
+    "aws:us-east-1:t3.micro": 0.008
+    "aws:us-east-1:m5.large": 0.080
+    "aws:us-west-2:c5.xlarge": 0.150
+    
+    # Azure Custom Rates (per hour)
+    "azure:eastus:Standard_B1s": 0.008
+    "azure:eastus:Standard_D2s_v3": 0.080
+    "azure:westus2:Standard_E4s_v3": 0.200
+    
+    # GCP Custom Rates (per hour)
+    "gcp:us-central1:f1-micro": 0.006
+    "gcp:us-central1:n1-standard-1": 0.040
+    "gcp:europe-west1:n2-standard-2": 0.085
+    
+    # Oracle Custom Rates (per hour)
+    "oracle:us-ashburn-1:VM.Standard.E2.1": 0.020
+    "oracle:us-ashburn-1:VM.Standard2.2": 0.045
+    
+    # Storage Custom Rates (per GB-month)
+    "aws:us-east-1:storage:gp3": 0.075
+    "azure:eastus:storage:Premium_LRS": 0.120
+    "gcp:us-central1:storage:pd-ssd": 0.150
+    "oracle:us-ashburn-1:storage:block": 0.020
+
+# General Settings
+output_dir: "./finops_reports"
+log_level: "INFO"
+enable_notifications: false
+data_retention_days: 90
+
+# Example Environment Variables for Cloud Credentials:
+# 
+# AWS:
+# export AWS_ACCESS_KEY_ID="your-access-key"
+# export AWS_SECRET_ACCESS_KEY="your-secret-key"
+# export AWS_DEFAULT_REGION="us-east-1"
+# 
+# Azure:
+# export AZURE_CLIENT_ID="your-client-id"
+# export AZURE_CLIENT_SECRET="your-client-secret"
+# export AZURE_TENANT_ID="your-tenant-id"
+# export AZURE_SUBSCRIPTION_ID="your-subscription-id"
+# 
+# GCP:
+# export GOOGLE_APPLICATION_CREDENTIALS="/path/to/service-account-key.json"
+# 
+# Oracle Cloud:
+# Configure ~/.oci/config file with your OCI credentials
+
+# Usage Examples:
+#
+# 1. Check real-time pricing:
+#    python cli.py pricing check-price --provider aws --region us-east-1 --instance-type m5.large
+#
+# 2. Add enterprise discount:
+#    python cli.py pricing add-discount --provider aws --service EC2 --discount 15
+#
+# 3. List all discounts:
+#    python cli.py pricing list-discounts
+#
+# 4. Run rightsizing with real-time pricing:
+#    python cli.py rightsizing --data-file data.json
+#
+# 5. Check pricing cache stats:
+#    python cli.py pricing cache-stats

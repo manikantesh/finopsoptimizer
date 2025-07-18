@@ -17,6 +17,7 @@ from .reporting import ReportGenerator
 from .aws import AWSProvider
 from .azure import AzureProvider
 from .gcp import GCPProvider
+from .oracle import OracleProvider
 
 
 class FinOpsOptimizer:
@@ -90,6 +91,13 @@ class FinOpsOptimizer:
                 self.logger.info("GCP provider initialized successfully")
             except Exception as e:
                 self.logger.error(f"Failed to initialize GCP provider: {e}")
+        
+        if self.config.oracle.enabled:
+            try:
+                self.providers['oracle'] = OracleProvider(self.config.oracle)
+                self.logger.info("Oracle Cloud provider initialized successfully")
+            except Exception as e:
+                self.logger.error(f"Failed to initialize Oracle Cloud provider: {e}")
     
     def analyze_costs(self, 
                      start_date: Optional[datetime] = None,

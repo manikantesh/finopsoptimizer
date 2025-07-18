@@ -1,5 +1,5 @@
 site_name: FinOps Optimizer Documentation
-site_description: Enterprise-grade cost optimization for multi-cloud environments
+site_description: AI-Powered Cost Optimization Platform with Real-Time Dashboards and Intelligent Agents for Multi-Cloud Environments
 site_author: FinOps Optimizer Team
 site_url: https://manikantesh.github.io/finopsoptimizer/
 
@@ -126,6 +126,9 @@ nav:
     - Installation: installation.md
     - Configuration: configuration.md
     - Tutorial: tutorial.md
+  - AI & Automation:
+    - AI Agents: ai-agents.md
+    - Real-Time Dashboards: real-time-dashboards.md
   - User Guide:
     - CLI Reference: cli-reference.md
     - API Reference: api-reference.md
@@ -138,6 +141,9 @@ nav:
     - Contributing: contributing.md
     - Deployment: deployment.md
     - Troubleshooting: troubleshooting.md
+  - Resources:
+    - Future Roadmap: ../FUTURE_ENHANCEMENTS_ROADMAP.md
+    - Implementation Summary: ../FINAL_IMPLEMENTATION_SUMMARY.md
 
 docs_dir: docs
 site_dir: site

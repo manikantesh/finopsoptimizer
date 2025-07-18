@@ -24,6 +24,12 @@ from .autoscaling import AutoscalingOptimizer
 from .forecasting import CostForecaster
 from .reporting import ReportGenerator
 from .config import Config
+from .data_ingestion import DataIngestionPipeline
+from .vm_rightsizing import VMRightsizingAnalyzer
+from .scheduler import CostOptimizationScheduler
+from .unattached_disks import UnattachedDisksRemediator
+from .reserved_instances import ReservedInstanceAnalyzer
+from .pricing_engine import RealTimePricingEngine, EnterpriseDiscount
 
 # Version info
 __version__ = "1.0.0"
@@ -39,5 +45,12 @@ __all__ = [
     "CostForecaster",
     "ReportGenerator",
     "Config",
+    "DataIngestionPipeline",
+    "VMRightsizingAnalyzer",
+    "CostOptimizationScheduler",
+    "UnattachedDisksRemediator",
+    "ReservedInstanceAnalyzer",
+    "RealTimePricingEngine",
+    "EnterpriseDiscount",
     "__version__",
 ] 

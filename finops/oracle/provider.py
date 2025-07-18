@@ -1,78 +1,92 @@
 """
-Oracle Cloud provider implementation for FinOpsOptimizer.
+Oracle Cloud Infrastructure (OCI) provider implementation for cost optimization.
 """
 
+import oci
 import logging
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
-import json
 
-from ..config import Config
+from ..config import CloudConfig
 
 
 class OracleProvider:
     """
-    Oracle Cloud provider implementation.
+    Oracle Cloud Infrastructure provider for cost optimization operations.
     
-    Handles cost analysis, resource inventory, and optimization
-    for Oracle Cloud Infrastructure (OCI).
+    Handles OCI-specific cost analysis, rightsizing, and autoscaling optimization.
     """
     
-    def __init__(self, config: Config):
+    def __init__(self, config: CloudConfig):
         """
         Initialize Oracle Cloud provider.
         
         Args:
-            config: Configuration object
+            config: Oracle Cloud-specific configuration
         """
         self.config = config
         self.logger = logging.getLogger(__name__)
         
-        # Oracle Cloud configuration
-        self.tenancy_id = config.oracle.get('tenancy_id')
-        self.user_id = config.oracle.get('user_id')
-        self.fingerprint = config.oracle.get('fingerprint')
-        self.private_key_path = config.oracle.get('private_key_path')
-        self.region = config.oracle.get('region', 'us-ashburn-1')
+        # Initialize OCI clients
+        self._initialize_clients()
         
-        # Initialize Oracle Cloud client
-        self._initialize_client()
+        # Initialize analyzers
+        from .cost_analyzer import OracleCostAnalyzer
+        from .rightsizing import OracleRightsizingAnalyzer
+        from .autoscaling import OracleAutoscalingOptimizer
+        
+        self.cost_analyzer = OracleCostAnalyzer(self)
+        self.rightsizing_analyzer = OracleRightsizingAnalyzer(self)
+        self.autoscaling_optimizer = OracleAutoscalingOptimizer(self)
     
-    def _initialize_client(self) -> None:
-        """Initialize Oracle Cloud client."""
+    def _initialize_clients(self) -> None:
+        """Initialize OCI service clients."""
         try:
-            import oci
+            # Load OCI configuration
+            config_file = self.config.credentials_path or "~/.oci/config"
+            self.oci_config = oci.config.from_file(config_file)
             
-            # Configure OCI client
-            config = {
-                'user': self.user_id,
-                'key_file': self.private_key_path,
-                'fingerprint': self.fingerprint,
-                'tenancy': self.tenancy_id,
-                'region': self.region
-            }
+            # Initialize service clients
+            self.compute_client = oci.core.ComputeClient(self.oci_config)
+            self.block_storage_client = oci.core.BlockstorageClient(self.oci_config)
+            self.virtual_network_client = oci.core.VirtualNetworkClient(self.oci_config)
+            self.identity_client = oci.identity.IdentityClient(self.oci_config)
+            self.monitoring_client = oci.monitoring.MonitoringClient(self.oci_config)
+            self.autoscaling_client = oci.autoscaling.AutoScalingClient(self.oci_config)
             
-            self.compute_client = oci.core.ComputeClient(config)
-            self.blockstorage_client = oci.core.BlockstorageClient(config)
-            self.network_client = oci.core.VirtualNetworkClient(config)
-            self.database_client = oci.database.DatabaseClient(config)
-            self.objectstorage_client = oci.object_storage.ObjectStorageClient(config)
-            self.budget_client = oci.budget.BudgetClient(config)
+            # Usage API client for cost data
+            self.usage_client = oci.usage_api.UsageapiClient(self.oci_config)
             
-            self.logger.info("Oracle Cloud client initialized successfully")
+            # Test connection
+            self._test_connection()
             
-        except ImportError:
-            self.logger.error("Oracle Cloud SDK not installed. Install with: pip install oci")
-            raise
         except Exception as e:
-            self.logger.error(f"Failed to initialize Oracle Cloud client: {e}")
+            self.logger.error(f"Failed to initialize OCI clients: {e}")
             raise
+    
+    def _test_connection(self) -> None:
+        """Test OCI connection by making a simple API call."""
+        try:
+            # Test with a simple API call
+            self.identity_client.get_user(self.oci_config["user"])
+            self.logger.info("Oracle Cloud connection test successful")
+        except Exception as e:
+            self.logger.error(f"Oracle Cloud connection test failed: {e}")
+            raise
+    
+    def is_connected(self) -> bool:
+        """Check if Oracle Cloud provider is properly connected."""
+        try:
+            self._test_connection()
+            return True
+        except:
+            return False
     
     def analyze_costs(self, 
-                     start_date: Optional[datetime] = None,
-                     end_date: Optional[datetime] = None) -> Dict[str, Any]:
+                     start_date: datetime,
+                     end_date: datetime) -> Dict[str, Any]:
         """
-        Analyze costs for Oracle Cloud resources.
+        Analyze Oracle Cloud costs for the specified period.
         
         Args:
             start_date: Start date for cost analysis
@@ -81,145 +95,43 @@ class OracleProvider:
         Returns:
             Dictionary containing cost analysis results
         """
-        if not start_date:
-            start_date = datetime.now() - timedelta(days=30)
-        if not end_date:
-            end_date = datetime.now()
-        
-        self.logger.info(f"Analyzing Oracle Cloud costs from {start_date} to {end_date}")
-        
-        try:
-            # Get cost data from Oracle Cloud
-            cost_data = self._get_cost_data(start_date, end_date)
-            
-            # Get resource inventory
-            resources = self._get_resource_inventory()
-            
-            # Calculate service breakdown
-            service_breakdown = self._calculate_service_breakdown(cost_data)
-            
-            # Calculate daily costs
-            daily_costs = self._calculate_daily_costs(cost_data, start_date, end_date)
-            
-            total_cost = sum(item['cost'] for item in cost_data)
-            
-            results = {
-                'total_cost': total_cost,
-                'service_breakdown': service_breakdown,
-                'resources': resources,
-                'daily_costs': daily_costs,
-                'analysis_period': {
-                    'start_date': start_date.isoformat(),
-                    'end_date': end_date.isoformat()
-                }
-            }
-            
-            self.logger.info(f"Oracle Cloud total cost: ${total_cost:.2f}")
-            return results
-            
-        except Exception as e:
-            self.logger.error(f"Error analyzing Oracle Cloud costs: {e}")
-            return {'error': str(e)}
+        return self.cost_analyzer.analyze_costs(start_date, end_date)
     
-    def _get_cost_data(self, start_date: datetime, end_date: datetime) -> List[Dict[str, Any]]:
+    def get_compute_instances(self) -> List[Dict[str, Any]]:
         """
-        Get cost data from Oracle Cloud.
-        
-        Args:
-            start_date: Start date
-            end_date: End date
-            
-        Returns:
-            List of cost data items
-        """
-        try:
-            # Use Oracle Cloud Cost Management API
-            # This is a simplified implementation
-            # In practice, you would use the actual Oracle Cloud APIs
-            
-            cost_data = []
-            
-            # Mock cost data for demonstration
-            # Replace with actual API calls
-            services = ['Compute', 'Block Storage', 'Object Storage', 'Database', 'Networking']
-            
-            for service in services:
-                for i in range((end_date - start_date).days):
-                    cost_data.append({
-                        'service': service,
-                        'cost': 10.0 + (i * 0.5),  # Mock cost
-                        'date': (start_date + timedelta(days=i)).isoformat(),
-                        'region': self.region
-                    })
-            
-            return cost_data
-            
-        except Exception as e:
-            self.logger.error(f"Error getting Oracle Cloud cost data: {e}")
-            return []
-    
-    def _get_resource_inventory(self) -> List[Dict[str, Any]]:
-        """
-        Get resource inventory from Oracle Cloud.
+        Get all compute instances with their details.
         
         Returns:
-            List of resources
+            List of compute instance details
         """
         try:
-            resources = []
-            
-            # Get compute instances
-            instances = self._get_compute_instances()
-            resources.extend(instances)
-            
-            # Get block storage volumes
-            volumes = self._get_block_storage_volumes()
-            resources.extend(volumes)
-            
-            # Get databases
-            databases = self._get_databases()
-            resources.extend(databases)
-            
-            # Get object storage buckets
-            buckets = self._get_object_storage_buckets()
-            resources.extend(buckets)
-            
-            return resources
-            
-        except Exception as e:
-            self.logger.error(f"Error getting Oracle Cloud resource inventory: {e}")
-            return []
-    
-    def _get_compute_instances(self) -> List[Dict[str, Any]]:
-        """
-        Get compute instances.
-        
-        Returns:
-            List of compute instances
-        """
-        try:
+            compartment_id = self.oci_config["tenancy"]
             instances = []
             
-            # List compute instances
-            response = self.compute_client.list_instances(
-                compartment_id=self.tenancy_id
-            )
+            # List all compute instances
+            response = self.compute_client.list_instances(compartment_id)
             
             for instance in response.data:
-                # Get instance metrics for utilization
-                utilization = self._get_instance_utilization(instance.id)
-                
-                instances.append({
+                instance_details = {
                     'id': instance.id,
-                    'type': 'Compute Instance',
-                    'name': instance.display_name,
+                    'display_name': instance.display_name,
                     'shape': instance.shape,
-                    'state': instance.lifecycle_state,
-                    'region': instance.region,
-                    'utilization': utilization,
-                    'cost': self._estimate_instance_cost(instance),
-                    'tags': self._get_instance_tags(instance)
-                })
+                    'lifecycle_state': instance.lifecycle_state,
+                    'availability_domain': instance.availability_domain,
+                    'compartment_id': instance.compartment_id,
+                    'time_created': instance.time_created,
+                    'defined_tags': instance.defined_tags,
+                    'freeform_tags': instance.freeform_tags
+                }
+                
+                # Get shape configuration if available
+                if hasattr(instance, 'shape_config') and instance.shape_config:
+                    instance_details['shape_config'] = {
+                        'ocpus': instance.shape_config.ocpus,
+                        'memory_in_gbs': instance.shape_config.memory_in_gbs
+                    }
+                
+                instances.append(instance_details)
             
             return instances
             
@@ -227,381 +139,349 @@ class OracleProvider:
             self.logger.error(f"Error getting compute instances: {e}")
             return []
     
-    def _get_block_storage_volumes(self) -> List[Dict[str, Any]]:
+    def get_block_volumes(self) -> List[Dict[str, Any]]:
         """
-        Get block storage volumes.
+        Get all block volumes with their details.
         
         Returns:
-            List of block storage volumes
+            List of block volume details
         """
         try:
+            compartment_id = self.oci_config["tenancy"]
             volumes = []
             
-            # List block volumes
-            response = self.blockstorage_client.list_volumes(
-                compartment_id=self.tenancy_id
-            )
+            # List all block volumes
+            response = self.block_storage_client.list_volumes(compartment_id)
             
             for volume in response.data:
                 volumes.append({
                     'id': volume.id,
-                    'type': 'Block Volume',
-                    'name': volume.display_name,
-                    'size_gb': volume.size_in_gbs,
-                    'state': volume.lifecycle_state,
-                    'region': volume.region,
-                    'cost': self._estimate_volume_cost(volume),
-                    'tags': self._get_volume_tags(volume)
+                    'display_name': volume.display_name,
+                    'size_in_gbs': volume.size_in_gbs,
+                    'lifecycle_state': volume.lifecycle_state,
+                    'availability_domain': volume.availability_domain,
+                    'compartment_id': volume.compartment_id,
+                    'time_created': volume.time_created,
+                    'is_encrypted': getattr(volume, 'is_encrypted', False),
+                    'defined_tags': volume.defined_tags,
+                    'freeform_tags': volume.freeform_tags
                 })
             
             return volumes
             
         except Exception as e:
-            self.logger.error(f"Error getting block storage volumes: {e}")
+            self.logger.error(f"Error getting block volumes: {e}")
             return []
     
-    def _get_databases(self) -> List[Dict[str, Any]]:
+    def get_unattached_volumes(self) -> List[Dict[str, Any]]:
         """
-        Get databases.
+        Get all unattached block volumes.
         
         Returns:
-            List of databases
+            List of unattached block volume details
         """
         try:
-            databases = []
+            all_volumes = self.get_block_volumes()
+            unattached_volumes = []
             
-            # List autonomous databases
-            response = self.database_client.list_autonomous_databases(
-                compartment_id=self.tenancy_id
-            )
+            for volume in all_volumes:
+                # Check if volume is attached to any instance
+                try:
+                    attachments = self.compute_client.list_volume_attachments(
+                        compartment_id=volume['compartment_id'],
+                        volume_id=volume['id']
+                    )
+                    
+                    # If no active attachments, it's unattached
+                    active_attachments = [
+                        att for att in attachments.data 
+                        if att.lifecycle_state == 'ATTACHED'
+                    ]
+                    
+                    if not active_attachments:
+                        unattached_volumes.append(volume)
+                        
+                except Exception as e:
+                    self.logger.error(f"Error checking attachments for volume {volume['id']}: {e}")
             
-            for db in response.data:
-                databases.append({
-                    'id': db.id,
-                    'type': 'Autonomous Database',
-                    'name': db.display_name,
-                    'db_workload': db.db_workload,
-                    'state': db.lifecycle_state,
-                    'region': db.region,
-                    'cost': self._estimate_database_cost(db),
-                    'tags': self._get_database_tags(db)
-                })
-            
-            return databases
+            return unattached_volumes
             
         except Exception as e:
-            self.logger.error(f"Error getting databases: {e}")
+            self.logger.error(f"Error getting unattached volumes: {e}")
             return []
     
-    def _get_object_storage_buckets(self) -> List[Dict[str, Any]]:
+    def get_autoscaling_configurations(self) -> List[Dict[str, Any]]:
         """
-        Get object storage buckets.
+        Get all autoscaling configurations.
         
         Returns:
-            List of object storage buckets
+            List of autoscaling configuration details
         """
         try:
-            buckets = []
+            compartment_id = self.oci_config["tenancy"]
+            configurations = []
             
-            # List object storage buckets
-            response = self.objectstorage_client.list_buckets(
-                namespace_name=self.tenancy_id,
-                compartment_id=self.tenancy_id
-            )
+            # List all autoscaling configurations
+            response = self.autoscaling_client.list_auto_scaling_configurations(compartment_id)
             
-            for bucket in response.data:
-                buckets.append({
-                    'id': bucket.name,
-                    'type': 'Object Storage Bucket',
-                    'name': bucket.name,
-                    'region': bucket.location,
-                    'cost': self._estimate_bucket_cost(bucket),
-                    'tags': self._get_bucket_tags(bucket)
+            for config in response.data:
+                configurations.append({
+                    'id': config.id,
+                    'display_name': config.display_name,
+                    'compartment_id': config.compartment_id,
+                    'time_created': config.time_created,
+                    'is_enabled': config.is_enabled,
+                    'defined_tags': config.defined_tags,
+                    'freeform_tags': config.freeform_tags
                 })
             
-            return buckets
+            return configurations
             
         except Exception as e:
-            self.logger.error(f"Error getting object storage buckets: {e}")
+            self.logger.error(f"Error getting autoscaling configurations: {e}")
             return []
     
-    def _get_instance_utilization(self, instance_id: str) -> Dict[str, float]:
+    def get_cost_and_usage(self,
+                          start_date: datetime,
+                          end_date: datetime,
+                          granularity: str = 'DAILY') -> Dict[str, Any]:
         """
-        Get instance utilization metrics.
+        Get cost and usage data from Oracle Cloud Usage API.
         
         Args:
-            instance_id: Instance ID
+            start_date: Start date for cost data
+            end_date: End date for cost data
+            granularity: Data granularity (DAILY, MONTHLY)
             
         Returns:
-            Dictionary with utilization metrics
+            Cost and usage data
         """
         try:
-            # Get CPU and memory utilization
-            # This would use Oracle Cloud Monitoring API
+            tenancy_id = self.oci_config["tenancy"]
+            
+            # Create usage request
+            request_summarized_usages_details = oci.usage_api.models.RequestSummarizedUsagesDetails(
+                tenant_id=tenancy_id,
+                time_usage_started=start_date,
+                time_usage_ended=end_date,
+                granularity=granularity,
+                group_by=['service']
+            )
+            
+            response = self.usage_client.request_summarized_usages(
+                request_summarized_usages_details
+            )
+            
             return {
-                'cpu': 0.5,  # Mock value
-                'memory': 0.6,  # Mock value
-                'network': 0.3  # Mock value
+                'items': [item.__dict__ for item in response.data.items],
+                'group_by': response.data.group_by,
+                'granularity': response.data.granularity
             }
+            
         except Exception as e:
-            self.logger.error(f"Error getting instance utilization: {e}")
-            return {'cpu': 0.0, 'memory': 0.0, 'network': 0.0}
+            self.logger.error(f"Error getting cost and usage data: {e}")
+            return {}
     
-    def _estimate_instance_cost(self, instance) -> float:
+    def get_monitoring_metrics(self,
+                              namespace: str,
+                              metric_name: str,
+                              dimensions: Dict[str, str],
+                              start_time: datetime,
+                              end_time: datetime,
+                              resolution: str = "1m") -> List[Dict[str, Any]]:
         """
-        Estimate instance cost.
+        Get monitoring metrics for analysis.
         
         Args:
-            instance: Instance object
+            namespace: Monitoring namespace
+            metric_name: Name of the metric
+            dimensions: Metric dimensions
+            start_time: Start time for metrics
+            end_time: End time for metrics
+            resolution: Metric resolution
             
         Returns:
-            Estimated cost
+            List of metric data points
         """
-        # Simplified cost estimation
-        # In practice, use actual pricing data
-        shape_costs = {
-            'VM.Standard2.1': 0.05,
-            'VM.Standard2.2': 0.10,
-            'VM.Standard2.4': 0.20,
-            'VM.Standard2.8': 0.40,
-            'VM.Standard2.16': 0.80
-        }
-        
-        return shape_costs.get(instance.shape, 0.10) * 24 * 30  # Monthly cost
+        try:
+            compartment_id = self.oci_config["tenancy"]
+            
+            # Create metric query
+            query = f"{metric_name}[{resolution}]{{namespace=\"{namespace}\""
+            for key, value in dimensions.items():
+                query += f", {key}=\"{value}\""
+            query += "}.mean()"
+            
+            # Summarize metrics request
+            summarize_metrics_data_details = oci.monitoring.models.SummarizeMetricsDataDetails(
+                namespace=namespace,
+                query=query,
+                start_time=start_time,
+                end_time=end_time,
+                resolution=resolution
+            )
+            
+            response = self.monitoring_client.summarize_metrics_data(
+                compartment_id,
+                summarize_metrics_data_details
+            )
+            
+            metrics = []
+            for item in response.data:
+                for datapoint in item.aggregated_datapoints:
+                    metrics.append({
+                        'timestamp': datapoint.timestamp,
+                        'value': datapoint.value,
+                        'dimensions': item.dimensions
+                    })
+            
+            return metrics
+            
+        except Exception as e:
+            self.logger.error(f"Error getting monitoring metrics: {e}")
+            return []
     
-    def _estimate_volume_cost(self, volume) -> float:
+    def start_instance(self, instance_id: str) -> bool:
         """
-        Estimate volume cost.
+        Start a compute instance.
         
         Args:
-            volume: Volume object
+            instance_id: Instance ID to start
             
         Returns:
-            Estimated cost
+            True if successful, False otherwise
         """
-        # $0.025 per GB per month
-        return volume.size_in_gbs * 0.025
+        try:
+            self.compute_client.instance_action(
+                instance_id,
+                action="START"
+            )
+            self.logger.info(f"Started instance {instance_id}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Error starting instance {instance_id}: {e}")
+            return False
     
-    def _estimate_database_cost(self, database) -> float:
+    def stop_instance(self, instance_id: str) -> bool:
         """
-        Estimate database cost.
+        Stop a compute instance.
         
         Args:
-            database: Database object
+            instance_id: Instance ID to stop
             
         Returns:
-            Estimated cost
+            True if successful, False otherwise
         """
-        # Simplified cost estimation
-        return 100.0  # Mock monthly cost
+        try:
+            self.compute_client.instance_action(
+                instance_id,
+                action="STOP"
+            )
+            self.logger.info(f"Stopped instance {instance_id}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Error stopping instance {instance_id}: {e}")
+            return False
     
-    def _estimate_bucket_cost(self, bucket) -> float:
+    def delete_volume(self, volume_id: str) -> bool:
         """
-        Estimate bucket cost.
+        Delete a block volume.
         
         Args:
-            bucket: Bucket object
+            volume_id: Volume ID to delete
             
         Returns:
-            Estimated cost
+            True if successful, False otherwise
         """
-        # Simplified cost estimation
-        return 5.0  # Mock monthly cost
+        try:
+            self.block_storage_client.delete_volume(volume_id)
+            self.logger.info(f"Deleted volume {volume_id}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Error deleting volume {volume_id}: {e}")
+            return False
     
-    def _get_instance_tags(self, instance) -> Dict[str, str]:
-        """Get instance tags."""
-        return getattr(instance, 'freeform_tags', {})
-    
-    def _get_volume_tags(self, volume) -> Dict[str, str]:
-        """Get volume tags."""
-        return getattr(volume, 'freeform_tags', {})
-    
-    def _get_database_tags(self, database) -> Dict[str, str]:
-        """Get database tags."""
-        return getattr(database, 'freeform_tags', {})
-    
-    def _get_bucket_tags(self, bucket) -> Dict[str, str]:
-        """Get bucket tags."""
-        return getattr(bucket, 'freeform_tags', {})
-    
-    def _calculate_service_breakdown(self, cost_data: List[Dict[str, Any]]) -> Dict[str, float]:
+    def create_volume_backup(self, volume_id: str, backup_name: str) -> Optional[str]:
         """
-        Calculate service cost breakdown.
+        Create a backup of a block volume.
         
         Args:
-            cost_data: List of cost data items
+            volume_id: Volume ID to backup
+            backup_name: Name for the backup
             
         Returns:
-            Dictionary with service costs
+            Backup ID if successful, None otherwise
         """
-        breakdown = {}
-        
-        for item in cost_data:
-            service = item['service']
-            cost = item['cost']
+        try:
+            create_volume_backup_details = oci.core.models.CreateVolumeBackupDetails(
+                volume_id=volume_id,
+                display_name=backup_name,
+                type="FULL"
+            )
             
-            if service in breakdown:
-                breakdown[service] += cost
-            else:
-                breakdown[service] = cost
-        
-        return breakdown
+            response = self.block_storage_client.create_volume_backup(
+                create_volume_backup_details
+            )
+            
+            backup_id = response.data.id
+            self.logger.info(f"Created backup {backup_id} for volume {volume_id}")
+            return backup_id
+            
+        except Exception as e:
+            self.logger.error(f"Error creating backup for volume {volume_id}: {e}")
+            return None
     
-    def _calculate_daily_costs(self, 
-                              cost_data: List[Dict[str, Any]],
-                              start_date: datetime,
-                              end_date: datetime) -> List[Dict[str, Any]]:
+    def get_rightsizing_recommendations(self) -> List[Dict[str, Any]]:
         """
-        Calculate daily costs.
+        Get rightsizing recommendations (placeholder implementation).
         
-        Args:
-            cost_data: List of cost data items
-            start_date: Start date
-            end_date: End date
-            
-        Returns:
-            List of daily costs
-        """
-        daily_costs = {}
-        
-        for item in cost_data:
-            date = item['date'][:10]  # Extract date part
-            cost = item['cost']
-            
-            if date in daily_costs:
-                daily_costs[date] += cost
-            else:
-                daily_costs[date] = cost
-        
-        return [
-            {'date': date, 'cost': cost}
-            for date, cost in sorted(daily_costs.items())
-        ]
-    
-    def get_rightsizing_recommendations(self, resources: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Get rightsizing recommendations for Oracle Cloud resources.
-        
-        Args:
-            resources: List of resources
-            
         Returns:
             List of rightsizing recommendations
         """
+        # Oracle Cloud doesn't have a built-in rightsizing API like AWS
+        # This would need to be implemented using monitoring data analysis
         recommendations = []
         
-        for resource in resources:
-            if resource['type'] == 'Compute Instance':
-                rec = self._analyze_instance_rightsizing(resource)
-                if rec:
-                    recommendations.append(rec)
-        
-        return recommendations
-    
-    def _analyze_instance_rightsizing(self, instance: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """
-        Analyze instance rightsizing.
-        
-        Args:
-            instance: Instance data
-            
-        Returns:
-            Rightsizing recommendation or None
-        """
-        utilization = instance.get('utilization', {})
-        cpu_util = utilization.get('cpu', 0.0)
-        memory_util = utilization.get('memory', 0.0)
-        
-        # Check for underutilized instances
-        if cpu_util < 0.3 and memory_util < 0.4:
-            return {
-                'type': 'rightsizing',
-                'resource_id': instance['id'],
-                'resource_type': 'Compute Instance',
-                'description': f"Instance {instance['name']} is underutilized",
-                'current_shape': instance['shape'],
-                'recommended_shape': self._get_smaller_shape(instance['shape']),
-                'potential_savings': self._calculate_shape_savings(instance),
-                'priority': 'medium',
-                'provider': 'oracle'
-            }
-        
-        return None
-    
-    def _get_smaller_shape(self, current_shape: str) -> str:
-        """
-        Get smaller instance shape.
-        
-        Args:
-            current_shape: Current shape
-            
-        Returns:
-            Smaller shape
-        """
-        shape_downgrades = {
-            'VM.Standard2.16': 'VM.Standard2.8',
-            'VM.Standard2.8': 'VM.Standard2.4',
-            'VM.Standard2.4': 'VM.Standard2.2',
-            'VM.Standard2.2': 'VM.Standard2.1'
-        }
-        
-        return shape_downgrades.get(current_shape, current_shape)
-    
-    def _calculate_shape_savings(self, instance: Dict[str, Any]) -> float:
-        """
-        Calculate potential savings from shape change.
-        
-        Args:
-            instance: Instance data
-            
-        Returns:
-            Potential savings
-        """
-        current_cost = instance.get('cost', 0.0)
-        # Estimate 30% savings for rightsizing
-        return current_cost * 0.3
-    
-    def get_autoscaling_recommendations(self, resources: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Get autoscaling recommendations for Oracle Cloud resources.
-        
-        Args:
-            resources: List of resources
-            
-        Returns:
-            List of autoscaling recommendations
-        """
-        recommendations = []
-        
-        # Oracle Cloud supports Instance Pools for autoscaling
-        # This would analyze current resources and recommend autoscaling groups
-        
-        return recommendations
-    
-    def validate_credentials(self) -> Dict[str, Any]:
-        """
-        Validate Oracle Cloud credentials.
-        
-        Returns:
-            Validation results
-        """
         try:
-            # Test API access
-            response = self.compute_client.list_instances(
-                compartment_id=self.tenancy_id,
-                limit=1
-            )
+            instances = self.get_compute_instances()
             
-            return {
-                'valid': True,
-                'message': 'Oracle Cloud credentials are valid',
-                'tenancy_id': self.tenancy_id,
-                'region': self.region
-            }
+            for instance in instances:
+                if instance['lifecycle_state'] == 'RUNNING':
+                    # Analyze instance utilization (simplified)
+                    # In a real implementation, you'd get actual metrics
+                    recommendations.append({
+                        'instance_id': instance['id'],
+                        'current_shape': instance['shape'],
+                        'recommendation_type': 'analyze_utilization',
+                        'description': f'Analyze utilization for instance {instance["display_name"]}'
+                    })
             
         except Exception as e:
-            return {
-                'valid': False,
-                'message': f'Invalid Oracle Cloud credentials: {e}',
-                'error': str(e)
-            } 
+            self.logger.error(f"Error getting rightsizing recommendations: {e}")
+        
+        return recommendations
+    
+    def get_reserved_instances(self) -> List[Dict[str, Any]]:
+        """
+        Get reserved instances information (placeholder implementation).
+        
+        Returns:
+            List of reserved instances
+        """
+        # Oracle Cloud uses different pricing models
+        # This would need to be implemented based on actual Oracle Cloud APIs
+        return []
+    
+    def get_savings_plans(self) -> List[Dict[str, Any]]:
+        """
+        Get savings plans information (placeholder implementation).
+        
+        Returns:
+            List of savings plans
+        """
+        # Oracle Cloud uses different pricing models
+        # This would need to be implemented based on actual Oracle Cloud APIs
+        return []

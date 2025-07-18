@@ -1,5 +1,5 @@
 """
-Oracle Cloud provider module for FinOpsOptimizer.
+Oracle Cloud provider implementation for FinOpsOptimizer.
 """
 
 from .provider import OracleProvider
@@ -12,4 +12,4 @@ __all__ = [
     "OracleCostAnalyzer", 
     "OracleRightsizingAnalyzer",
     "OracleAutoscalingOptimizer"
-] 
+]

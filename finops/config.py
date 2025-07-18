@@ -4,7 +4,7 @@ Handles settings for AWS, Azure, GCP, and optimization parameters.
 """
 
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from dataclasses import dataclass, field
 from pathlib import Path
 import yaml
@@ -44,6 +44,25 @@ class OptimizationConfig(BaseModel):
     include_recommendations: bool = True
 
 
+class PricingConfig(BaseModel):
+    """Configuration for pricing engine."""
+    # Real-time pricing settings
+    enable_real_time_pricing: bool = True
+    cache_ttl: int = 3600  # 1 hour
+    fallback_to_static: bool = True
+    
+    # Enterprise discounts
+    enterprise_discounts: List[Dict[str, Any]] = Field(default_factory=list)
+    
+    # Custom rates
+    custom_rates: Dict[str, float] = Field(default_factory=dict)
+    
+    # Pricing sources priority
+    pricing_sources: List[str] = Field(default_factory=lambda: [
+        "enterprise_contract", "cloud_provider_api", "pricing_api", "cached"
+    ])
+
+
 class Config(BaseModel):
     """Main configuration class for FinOpsOptimizer."""
     
@@ -51,9 +70,13 @@ class Config(BaseModel):
     aws: CloudConfig = Field(default_factory=CloudConfig)
     azure: CloudConfig = Field(default_factory=CloudConfig)
     gcp: CloudConfig = Field(default_factory=CloudConfig)
+    oracle: CloudConfig = Field(default_factory=CloudConfig)
     
     # Optimization settings
     optimization: OptimizationConfig = Field(default_factory=OptimizationConfig)
+    
+    # Pricing settings
+    pricing: PricingConfig = Field(default_factory=PricingConfig)
     
     # General settings
     output_dir: str = "./finops_reports"
@@ -103,6 +126,12 @@ class Config(BaseModel):
         if self.gcp.enabled:
             gcp_credentials = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
             results['gcp'] = bool(gcp_credentials and os.path.exists(gcp_credentials))
+        
+        # Oracle Cloud credentials
+        if self.oracle.enabled:
+            oci_config_file = os.getenv('OCI_CONFIG_FILE', '~/.oci/config')
+            oci_profile = os.getenv('OCI_PROFILE', 'DEFAULT')
+            results['oracle'] = bool(os.path.exists(os.path.expanduser(oci_config_file)))
         
         return results
 
