@@ -1,4 +1,4 @@
-site_name: FinOps Optimizer Documentation
+site_name: FinOps Optimizer
 site_description: AI-Powered Cost Optimization Platform with Real-Time Dashboards and Intelligent Agents for Multi-Cloud Environments
 site_author: FinOps Optimizer Team
 site_url: https://manikantesh.github.io/finopsoptimizer/
@@ -71,7 +71,6 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/version-selector.js
 
 markdown_extensions:
   - abbr
