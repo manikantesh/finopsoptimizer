@@ -142,8 +142,8 @@ nav:
     - Deployment: deployment.md
     - Troubleshooting: troubleshooting.md
   - Resources:
-    - Future Roadmap: ../FUTURE_ENHANCEMENTS_ROADMAP.md
-    - Implementation Summary: ../FINAL_IMPLEMENTATION_SUMMARY.md
+    - Future Roadmap: future-roadmap.md
+    - Implementation Summary: implementation-summary.md
 
 docs_dir: docs
 site_dir: site
