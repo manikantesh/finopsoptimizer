@@ -160,25 +160,6 @@ jobs:
           echo "Getting current deployed versions..."
           mike list --json > current_versions.json || echo "[]" > current_versions.json
           
-          # Create updated versions.json
-          cat > versions.json << 'EOF'
-[
-  {
-    "version": "latest",
-    "title": "Latest (Development)",
-    "aliases": ["main", "dev"]
-  },
-  {
-    "version": "VERSION_PLACEHOLDER",
-    "title": "TITLE_PLACEHOLDER",
-    "aliases": []
-  }
-]
-EOF
-          
-          # Replace placeholders
-          sed -i "s/VERSION_PLACEHOLDER/$VERSION/g" versions.json
-          
           # Extract title from release name
           if [[ "$RELEASE_NAME" == *" - "* ]]; then
             TITLE="$RELEASE_NAME"
@@ -186,7 +167,32 @@ EOF
             TITLE="v$VERSION - $RELEASE_NAME"
           fi
           
-          sed -i "s/TITLE_PLACEHOLDER/$TITLE/g" versions.json
+          # Create updated versions.json using Python
+          python3 << 'PYTHON_EOF'
+            import json
+            import os
+
+            version = os.environ.get('VERSION', '')
+            title = os.environ.get('TITLE', '')
+
+            versions_data = [
+                {
+                    "version": "latest",
+                    "title": "Latest (Development)",
+                    "aliases": ["main", "dev"]
+                },
+                {
+                    "version": version,
+                    "title": title,
+                    "aliases": []
+                }
+            ]
+
+            with open('versions.json', 'w') as f:
+                json.dump(versions_data, f, indent=2)
+
+            print(f"Created versions.json with version {version}")
+            PYTHON_EOF
           
           echo "Updated versions.json:"
           cat versions.json
@@ -200,3 +206,6 @@ EOF
           else
             echo "No changes to versions.json"
           fi
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+          TITLE: ${{ github.event.release.name }}
