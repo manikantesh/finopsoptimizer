@@ -126,6 +126,7 @@ nav:
   - Home: index.md
   - Getting Started:
     - Installation: installation.md
+    - Local Setup: local-setup.md
     - Configuration: configuration.md
     - Tutorial: tutorial.md
   - AI & Automation:
