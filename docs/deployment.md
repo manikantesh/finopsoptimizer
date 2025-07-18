@@ -15,8 +15,8 @@ The documentation is automatically deployed to GitHub Pages whenever:
 
 The deployment is handled by GitHub Actions workflows:
 
-- **Main Deployment**: `/.github/workflows/deploy-docs.yml`
-- **Release Deployment**: `/.github/workflows/release.yml`
+- **Documentation Deployment**: `.github/workflows/docs.yml`
+- **Automatic Versioning**: Integrated with GitHub releases
 
 ### 2. Manual Deployment
 
@@ -41,7 +41,7 @@ gh pages deploy site --branch gh-pages
 ### How Versioning Works
 
 1. **Main Branch**: Always deploys to `https://manikantesh.github.io/finopsoptimizer/`
-2. **Releases**: Deploy to `https://manikantesh.github.io/finopsoptimizer/v1.0.0/`
+2. **Releases**: Deploy to `https://manikantesh.github.io/finopsoptimizer/v2.0.0/`
 3. **Version Selector**: Allows users to switch between versions
 
 ### Creating a New Version

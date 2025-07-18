@@ -1,6 +1,6 @@
 # FinOps Optimizer Documentation
 
-Welcome to the FinOps Optimizer documentation! This comprehensive AI-powered platform helps you optimize costs across AWS, Azure, GCP, and Oracle Cloud with intelligent agents, real-time dashboards, and enterprise-grade features.
+Welcome to the FinOps Optimizer documentation! This comprehensive platform helps you optimize costs across AWS, Azure, GCP, and Oracle Cloud with intelligent rightsizing, reserved instance analysis, and automated resource cleanup.
 
 ## 🚀 Quick Start
 
@@ -66,13 +66,7 @@ Complete API documentation for all classes and methods.
 
 Command-line interface documentation and examples.
 
-### [AI Agents](ai-agents.md)
 
-Comprehensive guide to AI-powered cost optimization agents and intelligent automation.
-
-### [Real-Time Dashboards](real-time-dashboards.md)
-
-Interactive dashboards with real-time cost monitoring and advanced analytics.
 
 ### [Web Dashboard](web-dashboard.md)
 
@@ -92,44 +86,29 @@ Common issues and solutions.
 
 ## 🌟 Key Features
 
-### 🤖 AI-Powered Optimization
-
-- **Intelligent Agents**: Autonomous cost optimization, anomaly detection, predictive scaling
-- **Machine Learning**: Advanced ML models for cost forecasting and resource optimization
-- **Natural Language Processing**: Chat-based cost analysis and recommendations
-
-### 📊 Real-Time Analytics
-
-- **Live Dashboards**: Interactive dashboards with real-time cost monitoring
-- **Advanced Visualizations**: D3.js-powered charts and graphs
-- **Custom Metrics**: Build your own KPIs and cost tracking metrics
-
-### 🏗️ Enterprise Architecture
-
-- **Kubernetes-Native**: Full containerization with Helm charts and auto-scaling
-- **Microservices**: Event-driven architecture with message queues
-- **High Availability**: 99.9% uptime with distributed caching and load balancing
-
-### 💾 Advanced Data Stack
-
-- **Real-Time Processing**: Apache Kafka + Flink for streaming analytics
-- **Search & Analytics**: Elasticsearch for advanced cost data search
-- **Distributed Caching**: Redis Cluster for high-performance data access
-- **Time-Series Database**: InfluxDB for metrics and cost data storage
-
-### 🔒 Enterprise Security
-
-- **Identity Management**: Keycloak integration for SSO and RBAC
-- **Policy Engine**: Open Policy Agent (OPA) for fine-grained access control
-- **Secrets Management**: HashiCorp Vault for secure credential storage
-- **Audit & Compliance**: Complete audit trails and compliance reporting
-
-### 🌐 Multi-Cloud Excellence
+### 🌐 Multi-Cloud Cost Optimization
 
 - **Provider Support**: AWS, Azure, GCP, Oracle Cloud with unified APIs
-- **Cost Optimization**: Rightsizing, reserved instances, spot instances, unattached resources
+- **VM Rightsizing**: Intelligent instance size recommendations based on utilization analysis
+- **Reserved Instances**: Analysis and recommendations for RI purchases with ROI calculations
+- **Unattached Resources**: Identify and clean up unused storage volumes and snapshots
 - **Real-Time Pricing**: Live pricing data integration for accurate cost calculations
-- **Cross-Cloud Analytics**: Compare costs and performance across providers
+
+### 📊 Cost Analysis & Reporting
+
+- **Cost Forecasting**: Machine learning-powered cost predictions using scikit-learn
+- **Trend Analysis**: Historical cost analysis and variance detection
+- **Custom Reports**: Flexible reporting with multiple output formats (HTML, JSON, CSV)
+- **Interactive Visualizations**: Charts and graphs using matplotlib, plotly, and seaborn
+- **Data Export**: Export cost data and recommendations for further analysis
+
+### 🔧 Automation & Scheduling
+
+- **Automated Optimization**: Scheduled cost optimization tasks with configurable intervals
+- **Resource Scheduling**: VM start/stop scheduling for development environments
+- **Batch Processing**: Large-scale data processing and analysis across multiple accounts
+- **CLI Automation**: Comprehensive command-line interface for scripting and automation
+- **Configuration Management**: Centralized configuration with YAML-based settings
 
 ## 🔧 Architecture
 
@@ -284,136 +263,90 @@ docker run -p 8000:8000 finopsoptimizer
 
 ### Core Platform
 
-- **Backend**: Python with FastAPI and WebSocket support
-- **Frontend**: React + D3.js for interactive visualizations
-- **Container Platform**: Kubernetes with Helm charts
-- **Service Mesh**: Istio for traffic management and security
+- **Backend**: Python with Flask web framework
+- **CLI**: Click-based command-line interface
+- **Data Processing**: Pandas and NumPy for data analysis
+- **Machine Learning**: Scikit-learn for cost forecasting
 
-### Data & Analytics
+### Cloud Provider SDKs
 
-- **Streaming**: Apache Kafka + Apache Flink
-- **Search**: Elasticsearch + Kibana
-- **Time-Series**: InfluxDB for metrics storage
-- **Cache**: Redis Cluster for high-performance access
-- **Object Storage**: MinIO (S3-compatible)
+- **AWS**: Boto3 for AWS API integration
+- **Azure**: Azure SDK for Python (azure-mgmt-*)
+- **Google Cloud**: Google Cloud Client Libraries
+- **Oracle Cloud**: OCI SDK for Python
 
-### AI & Machine Learning
+### Data Visualization & Reporting
 
-- **Agent Framework**: LangChain + Ollama for local AI deployment
-- **ML Pipeline**: Apache Airflow for orchestration
-- **Model Management**: MLflow for experiment tracking
-- **Vector Database**: Chroma for cost optimization knowledge
+- **Charts**: Matplotlib, Plotly, and Seaborn for visualizations
+- **Web Dashboard**: Flask with Flask-Login for authentication
+- **Reports**: HTML, JSON, and CSV export formats
+- **Templates**: Jinja2 for report templating
 
-### Security & Operations
+### Security & Performance
 
-- **Identity**: Keycloak for SSO and RBAC
-- **Policy Engine**: Open Policy Agent (OPA)
-- **Secrets**: HashiCorp Vault
-- **Monitoring**: Prometheus + Grafana + Jaeger
-
-## 🤖 AI Agents
-
-### Autonomous Optimization Agent
-
-Continuously monitors your infrastructure and automatically applies cost optimizations:
-
-- **Smart Rightsizing**: ML-powered instance size recommendations
-- **Predictive Scaling**: Forecast demand and pre-scale resources
-- **Anomaly Detection**: Identify unusual spending patterns
-- **Auto-Remediation**: Automatically fix common cost issues
-
-### Cost Advisor Agent
-
-Your personal FinOps consultant powered by AI:
-
-- **Natural Language Queries**: Ask questions about your costs in plain English
-- **Personalized Recommendations**: Tailored advice based on your usage patterns
-- **Trend Analysis**: Identify cost trends and provide insights
-- **Budget Planning**: AI-assisted budget forecasting and planning
-
-## 📊 Real-Time Dashboards
-
-### Executive Dashboard
-
-High-level overview for leadership:
-
-- Cost trends and forecasts
-- Savings achieved and opportunities
-- Budget vs actual spending
-- ROI metrics and KPIs
-
-### Engineering Dashboard
-
-Technical insights for development teams:
-
-- Resource utilization metrics
-- Rightsizing opportunities
-- Performance vs cost analysis
-- Service-level cost attribution
-
-### Operations Dashboard
-
-Real-time monitoring for ops teams:
-
-- Live cost alerts and notifications
-- System health and performance
-- Automated action status
-- Compliance and security metrics
+- **Encryption**: Cryptography library for secure data handling
+- **Authentication**: BCrypt for password hashing
+- **Performance**: Asyncio and aiohttp for async operations
+- **Monitoring**: PSUtil for system monitoring
 
 ## 🔄 Deployment Options
 
-### Kubernetes Deployment
-
-```bash
-# Add Helm repository
-helm repo add finops https://charts.finopsoptimizer.com
-
-# Install with custom values
-helm install finops finops/finopsoptimizer \
-  --set ingress.enabled=true \
-  --set redis.cluster.enabled=true \
-  --set elasticsearch.enabled=true
-```
-
-### Docker Compose
+### Local Development
 
 ```bash
 # Clone repository
 git clone https://github.com/manikantesh/finopsoptimizer.git
 cd finopsoptimizer
 
-# Start all services
-docker-compose up -d
+# Run automated setup
+python quick_start.py
 
-# Access dashboard
-open http://localhost:8080
+# Start web dashboard
+python -m web.app
 ```
 
-### Cloud Deployment
+### Docker Deployment
 
-- **AWS**: EKS with Application Load Balancer
-- **Azure**: AKS with Azure Application Gateway
-- **GCP**: GKE with Google Cloud Load Balancer
-- **Oracle**: OKE with Oracle Cloud Infrastructure
+```bash
+# Build image
+docker build -t finopsoptimizer .
 
-## 📈 Scalability & Performance
+# Run container
+docker run -p 5000:5000 finopsoptimizer
+```
 
-### High Availability
+### Production Deployment
 
-- **Multi-Region**: Deploy across multiple regions for disaster recovery
-- **Load Balancing**: Automatic traffic distribution across instances
-- **Auto-Scaling**: KEDA-based event-driven scaling
-- **Circuit Breakers**: Resilient service communication
+```bash
+# Install production dependencies
+pip install finopsoptimizer[production]
+
+# Configure environment
+export FINOPS_CONFIG_PATH=/path/to/config.yml
+export FINOPS_SECRET_KEY=your-secret-key
+
+# Start web server
+gunicorn -w 4 -b 0.0.0.0:8000 web.app:app
+```
+
+## 📈 Performance & Monitoring
 
 ### Performance Metrics
 
-- **Response Time**: <100ms for cached queries, <500ms for complex analytics
-- **Throughput**: Handle 10,000+ cost events per second
-- **Concurrent Users**: Support 1,000+ simultaneous dashboard users
-- **Data Retention**: 2+ years of historical cost data with fast queries
+- **Cache Hit Rate**: 75-85% average
+- **Response Time**: 200-500ms for cached operations
+- **Memory Usage**: 50-100MB typical usage
+- **Concurrent Users**: Support for 10-50 users
+
+### Monitoring Features
+
+- **Health Checks**: System health monitoring
+- **Audit Logging**: Complete audit trails
+- **Performance Metrics**: Response time and resource usage tracking
+- **Error Handling**: Comprehensive error logging and reporting
 
 ---
 
-**FinOps Optimizer** - AI-Powered Cost Optimization for the Modern Cloud
+**FinOps Optimizer** - Multi-Cloud Cost Optimization Platform
 
-_Transform your cloud costs with intelligent automation, real-time insights, and enterprise-grade security._
+_Optimize your cloud costs with intelligent rightsizing, reserved instance analysis, and automated resource cleanup._

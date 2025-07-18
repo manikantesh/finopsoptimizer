@@ -5,9 +5,9 @@
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://manikantesh.github.io/finopsoptimizer/)
 [![Deploy Documentation](https://github.com/manikantesh/finopsoptimizer/actions/workflows/docs.yml/badge.svg)](https://github.com/manikantesh/finopsoptimizer/actions/workflows/docs.yml)
 
-**AI-Powered Cost Optimization Platform with Real-Time Dashboards and Intelligent Agents for Multi-Cloud Environments**
+**Multi-Cloud Cost Optimization Platform for AWS, Azure, GCP, and Oracle Cloud**
 
-Transform your cloud costs with intelligent automation, real-time insights, and enterprise-grade security across AWS, Azure, GCP, and Oracle Cloud.
+Optimize your cloud costs with intelligent rightsizing, reserved instance analysis, and automated resource cleanup across multiple cloud providers.
 
 ---
 
@@ -62,18 +62,17 @@ python cli.py report
 
 ### 🌐 Live Documentation
 - **[📖 Latest Documentation](https://manikantesh.github.io/finopsoptimizer/)** - Always up-to-date
-- **[📋 Version 2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - AI Agents & Real-time Dashboards
-- **[📋 Version 2.0.0](https://manikantesh.github.io/finopsoptimizer/2.0.0/)** - Multi-Cloud Support
+- **[📋 Version 2.1.0](https://manikantesh.github.io/finopsoptimizer/2.1.0/)** - Enhanced Multi-Cloud Support
+- **[📋 Version 2.0.0](https://manikantesh.github.io/finopsoptimizer/2.0.0/)** - Multi-Cloud Foundation
 
 ### 📖 Key Documentation Pages
 - **[🚀 Installation Guide](https://manikantesh.github.io/finopsoptimizer/installation/)** - Complete setup instructions
 - **[🏠 Local Setup Guide](https://manikantesh.github.io/finopsoptimizer/local-setup/)** - Local development setup
 - **[⚙️ Configuration Guide](https://manikantesh.github.io/finopsoptimizer/configuration/)** - Configuration options
-- **[🤖 AI Agents](https://manikantesh.github.io/finopsoptimizer/ai-agents/)** - AI-powered optimization
-- **[📊 Real-Time Dashboards](https://manikantesh.github.io/finopsoptimizer/real-time-dashboards/)** - Interactive dashboards
 - **[🔧 CLI Reference](https://manikantesh.github.io/finopsoptimizer/cli-reference/)** - Command-line interface
-- **[🔒 Security Guide](https://manikantesh.github.io/finopsoptimizer/security/)** - Security best practices
-- **[🛠️ Troubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)** - Common issues and solutions
+- **[🌐 Web Dashboard](https://manikantesh.github.io/finopsoptimizer/web-dashboard/)** - Web interface guide
+- **[� Sec urity Guide](https://manikantesh.github.io/finopsoptimizer/security/)** - Security best practices
+- **[�️ eTroubleshooting](https://manikantesh.github.io/finopsoptimizer/troubleshooting/)** - Common issues and solutions
 
 ### 📋 Documentation Features
 - **Version Selector**: Switch between documentation versions using the dropdown
@@ -83,42 +82,40 @@ python cli.py report
 
 ## 🌟 Key Features
 
-### 🤖 AI-Powered Optimization
-- **Autonomous Optimization Agent**: Continuously monitors and automatically applies cost optimizations
-- **Cost Advisor Agent**: AI-powered cost consultant with natural language processing
-- **Machine Learning Models**: Advanced ML for cost forecasting and resource optimization
-- **Intelligent Automation**: Smart rightsizing, predictive scaling, and anomaly detection
-
-### 📊 Real-Time Analytics
-- **Live Dashboards**: Interactive dashboards with real-time cost monitoring
-- **Executive Dashboard**: High-level cost overview for leadership
-- **Engineering Dashboard**: Technical insights for development teams
-- **Operations Dashboard**: Real-time monitoring for DevOps/SRE teams
-- **Advanced Visualizations**: D3.js-powered charts and graphs
-
-### 🏗️ Enterprise Architecture
-- **Kubernetes-Native**: Full containerization with Helm charts and auto-scaling
-- **Microservices**: Event-driven architecture with message queues
-- **High Availability**: 99.9% uptime with distributed caching and load balancing
-- **Advanced Data Stack**: Apache Kafka + Flink + Redis + Elasticsearch
-
-### 💾 Advanced Data Management
-- **Real-Time Processing**: Apache Kafka + Flink for streaming analytics
-- **Search & Analytics**: Elasticsearch for advanced cost data search
-- **Distributed Caching**: Redis Cluster for high-performance data access
-- **Time-Series Database**: InfluxDB for metrics and cost data storage
-
-### 🔒 Enterprise Security
-- **Identity Management**: Keycloak integration for SSO and RBAC
-- **Policy Engine**: Open Policy Agent (OPA) for fine-grained access control
-- **Secrets Management**: HashiCorp Vault for secure credential storage
-- **Audit & Compliance**: Complete audit trails and compliance reporting
-
-### 🌐 Multi-Cloud Excellence
+### 🌐 Multi-Cloud Cost Optimization
 - **Provider Support**: AWS, Azure, GCP, Oracle Cloud with unified APIs
-- **Cost Optimization**: Rightsizing, reserved instances, spot instances, unattached resources
+- **VM Rightsizing**: Intelligent instance size recommendations based on utilization analysis
+- **Reserved Instances**: Analysis and recommendations for RI purchases with ROI calculations
+- **Unattached Resources**: Identify and clean up unused storage volumes and snapshots
 - **Real-Time Pricing**: Live pricing data integration for accurate cost calculations
-- **Cross-Cloud Analytics**: Compare costs and performance across providers
+
+### 📊 Cost Analysis & Reporting
+- **Cost Forecasting**: Machine learning-powered cost predictions using scikit-learn
+- **Trend Analysis**: Historical cost analysis and variance detection
+- **Custom Reports**: Flexible reporting with multiple output formats (HTML, JSON, CSV)
+- **Interactive Visualizations**: Charts and graphs using matplotlib, plotly, and seaborn
+- **Data Export**: Export cost data and recommendations for further analysis
+
+### 🔧 Automation & Scheduling
+- **Automated Optimization**: Scheduled cost optimization tasks with configurable intervals
+- **Resource Scheduling**: VM start/stop scheduling for development environments
+- **Batch Processing**: Large-scale data processing and analysis across multiple accounts
+- **CLI Automation**: Comprehensive command-line interface for scripting and automation
+- **Configuration Management**: Centralized configuration with YAML-based settings
+
+### 🌐 Web Dashboard
+- **Flask-based Interface**: Web dashboard for cost monitoring and management
+- **Real-time Updates**: Live cost data and optimization status
+- **User Authentication**: Secure login system with Flask-Login
+- **Mobile Responsive**: Works on desktop and mobile devices
+- **Interactive Reports**: Web-based report viewing and analysis
+
+### 🔒 Security & Performance
+- **Data Encryption**: Secure handling of cloud credentials using cryptography
+- **Audit Logging**: Complete audit trails for all optimization actions
+- **Performance Optimization**: Intelligent caching and parallel processing
+- **Rate Limiting**: API protection and usage optimization
+- **Input Validation**: Protection against injection attacks and malformed data
 
 ## 📊 Supported Cloud Providers
 
@@ -222,49 +219,48 @@ For detailed configuration instructions, see the [Configuration Guide](https://m
 ## 🎯 Use Cases
 
 ### Cost Optimization
-- **VM Rightsizing**: AI-powered instance size recommendations
+- **VM Rightsizing**: ML-powered instance size recommendations using scikit-learn
 - **Reserved Instances**: Automated RI analysis and purchase recommendations
 - **Unattached Resources**: Identify and clean up unused storage volumes
-- **Spot Instances**: Optimize workloads for spot instance usage
+- **Cost Forecasting**: Predict future costs based on historical data
 
-### Real-Time Monitoring
-- **Live Dashboards**: Monitor costs in real-time across all providers
-- **Anomaly Detection**: AI-powered detection of unusual spending patterns
-- **Budget Tracking**: Track spending against budgets with alerts
-- **Trend Analysis**: Historical cost analysis and forecasting
+### Monitoring & Reporting
+- **Web Dashboard**: Monitor costs through Flask-based web interface
+- **Custom Reports**: Generate detailed reports in HTML, JSON, and CSV formats
+- **Trend Analysis**: Historical cost analysis and variance detection
+- **Data Visualization**: Interactive charts using matplotlib and plotly
 
-### Automation & Intelligence
-- **Autonomous Agents**: AI agents that optimize costs automatically
-- **Predictive Scaling**: Forecast demand and pre-scale resources
-- **Intelligent Alerts**: Smart notifications based on spending patterns
-- **Natural Language Queries**: Ask questions about costs in plain English
+### Automation & Scheduling
+- **Scheduled Optimization**: Automated cost optimization tasks
+- **Resource Scheduling**: VM start/stop scheduling for development environments
+- **Batch Processing**: Large-scale analysis across multiple cloud accounts
+- **CLI Automation**: Script-friendly command-line interface
 
 ## 🚀 Technology Stack
 
 ### Core Platform
-- **Backend**: Python with FastAPI and WebSocket support
-- **Frontend**: React + D3.js for interactive visualizations
-- **Container Platform**: Kubernetes with Helm charts
-- **Service Mesh**: Istio for traffic management and security
+- **Backend**: Python with Flask web framework
+- **CLI**: Click-based command-line interface
+- **Data Processing**: Pandas and NumPy for data analysis
+- **Machine Learning**: Scikit-learn for cost forecasting
 
-### Data & Analytics
-- **Streaming**: Apache Kafka + Apache Flink
-- **Search**: Elasticsearch + Kibana
-- **Time-Series**: InfluxDB for metrics storage
-- **Cache**: Redis Cluster for high-performance access
-- **Object Storage**: MinIO (S3-compatible)
+### Cloud Provider SDKs
+- **AWS**: Boto3 for AWS API integration
+- **Azure**: Azure SDK for Python (azure-mgmt-*)
+- **Google Cloud**: Google Cloud Client Libraries
+- **Oracle Cloud**: OCI SDK for Python
 
-### AI & Machine Learning
-- **Agent Framework**: LangChain + Ollama for local AI deployment
-- **ML Pipeline**: Apache Airflow for orchestration
-- **Model Management**: MLflow for experiment tracking
-- **Vector Database**: Chroma for cost optimization knowledge
+### Data Visualization & Reporting
+- **Charts**: Matplotlib, Plotly, and Seaborn for visualizations
+- **Web Dashboard**: Flask with Flask-Login for authentication
+- **Reports**: HTML, JSON, and CSV export formats
+- **Templates**: Jinja2 for report templating
 
-### Security & Operations
-- **Identity**: Keycloak for SSO and RBAC
-- **Policy Engine**: Open Policy Agent (OPA)
-- **Secrets**: HashiCorp Vault
-- **Monitoring**: Prometheus + Grafana + Jaeger
+### Security & Performance
+- **Encryption**: Cryptography library for secure data handling
+- **Authentication**: BCrypt for password hashing
+- **Performance**: Asyncio and aiohttp for async operations
+- **Monitoring**: PSUtil for system monitoring
 
 ## 📋 Documentation Versioning
 
