@@ -239,34 +239,6 @@ mkdocs build --verbose
 - **Clear indicators**: Show which version is currently active
 - **Fast switching**: Optimize for quick version transitions
 
-## 🏷️ Creating a GitHub Release
-
-Beyond pushing a tag (above), releases are usually cut from the GitHub UI:
-
-1. Go to the repository's **Releases** page and click **Create a new release**.
-2. **Tag**: use semantic versioning, e.g. `v2.2.0` (the `v` prefix is stripped automatically).
-3. **Title**: a short, descriptive summary, e.g. `v2.2.0 - Oracle Cloud Integration`.
-4. **Description**: group notes under headings (`New Features`, `Improvements`, `Bug Fixes`) -- the first line becomes the version's description in the dropdown.
-5. Check **Set as the latest release** if applicable, then **Publish release**.
-
-Publishing triggers the same GitHub Actions workflow as pushing a tag: the version is built, deployed to `https://manikantesh.github.io/finopsoptimizer/<version>/`, and added to the version dropdown within a couple of minutes.
-
-### Release checklist
-
-- [ ] All features tested, `pytest` passing
-- [ ] `CHANGELOG.md` and version numbers updated
-- [ ] Tag follows semantic versioning
-- [ ] Release published (not left as a draft)
-- [ ] Version appears in the live dropdown after deploy
-
-## 🌐 Custom Domain (Optional)
-
-To serve docs from your own domain instead of `github.io`:
-
-1. Add a `CNAME` file to `docs/` containing the domain, e.g. `docs.yourdomain.com`.
-2. Point DNS at GitHub Pages: `docs.yourdomain.com CNAME manikantesh.github.io`.
-3. Set `site_url` in `mkdocs.yml` to match.
-
 ## 📈 Future Enhancements
 
 ### Planned Features

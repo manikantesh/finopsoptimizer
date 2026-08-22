@@ -128,24 +128,6 @@ python cli.py report
 - **Rate Limiting**: API protection and usage optimization
 - **Input Validation**: Protection against injection attacks and malformed data
 
-## 🤖 Agent Observability (AgentOps) -- new
-
-Trace AI agent sessions, get per-call token cost, and get root-cause alerts
-for cost/error/latency anomalies -- separate from the multi-cloud tooling
-above, with its own lightweight footprint (no pandas/boto3/ClickHouse, just
-`fastapi`/`uvicorn`). Ingestion is **OpenTelemetry-only**: any agent, in any
-language, that can export OTLP traces works out of the box.
-
-```bash
-pip install -e '.[agentops]'
-finops agentops demo    # seed a few sample sessions
-finops agentops serve   # http://127.0.0.1:8787 -- live dashboard
-```
-
-See [docs/agent-observability.md](docs/agent-observability.md) for how to
-connect your own agent (OpenTelemetry SDK, the Python `AgentSession`
-wrapper, or raw HTTP), the attribute reference, and pricing overrides.
-
 ## 📊 Supported Cloud Providers
 
 | Provider | Cost Analysis | Rightsizing | Reserved Instances | Unattached Resources | Real-Time Pricing |

@@ -173,7 +173,6 @@ finops_cache/
 reports/
 output/
 *.html
-!finops/agentops/static/*.html
 *.pdf
 validation_report.json
 

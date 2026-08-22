@@ -56,11 +56,6 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-agentops = [
-    "fastapi>=0.100.0",
-    "uvicorn>=0.23.0",
-    "requests>=2.28.0",
-]
 dev = [
     "pytest>=7.3.0",
     "pytest-cov>=4.0.0",
