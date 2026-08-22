@@ -134,19 +134,17 @@ nav:
     - CLI Reference: cli-reference.md
     - API Reference: api-reference.md
     - Web Dashboard: web-dashboard.md
+    - Agent Observability (AgentOps): agent-observability.md
   - Advanced Topics:
     - Security: security.md
     - Performance: performance.md
     - Monitoring: monitoring.md
   - Development:
     - Contributing: contributing.md
-    - Deployment: deployment.md
-    - Release Management: release-management.md
-    - Versioning Guide: versioning-guide.md
+    - Versioning & Releases: versioning-guide.md
     - Troubleshooting: troubleshooting.md
   - Resources:
     - Future Roadmap: future-roadmap.md
-    - Implementation Summary: implementation-summary.md
 
 docs_dir: docs
 site_dir: site

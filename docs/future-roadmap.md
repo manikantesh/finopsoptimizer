@@ -3,6 +3,59 @@
 ## Overview
 This document outlines potential enhancements to transform the current FinOps platform into a comprehensive, AI-powered, real-time cost optimization solution using entirely open source technologies.
 
+## 🔭 Agent Observability (AgentOps) Roadmap
+
+Tracked here as milestones (not yet filed as GitHub issues -- `gh` needs
+`gh auth login` in this environment first; file these against
+[github.com/manikantesh/finopsoptimizer/issues](https://github.com/manikantesh/finopsoptimizer/issues)
+once authenticated). See `docs/agent-observability.md` for what's usable today.
+
+**Milestone 1 -- Tracing foundation: done**
+OTLP/HTTP JSON ingestion (`POST /v1/traces`, GenAI semantic-convention
+attributes), SQLite-backed session/turn/event storage, `finops agentops
+serve`/`demo` CLI, live dashboard over SSE.
+
+**Milestone 2 -- Cost analytics: partial**
+- [x] Per-call token cost (input/output, overridable price table)
+- [x] Session-level cost rollup
+- [ ] Split cost into input/output/cached/reasoning/tool/infra components
+      instead of one blended float (per the cost-engine design's per-category
+      cost model)
+- [ ] Point-in-time-versioned pricing (`effective_from`/`effective_to`), so a
+      price-table change doesn't retroactively re-price historical sessions
+- [ ] Cost-by-model / cost-by-agent breakdown views (currently only
+      per-session; the raw data supports grouping, the read API doesn't
+      expose it yet)
+
+**Milestone 3 -- Voice observability + dashboard builder: not started**
+- [ ] Voice-specific span fields: STT/TTS/endpointing latency, time-to-first-audio,
+      interruption count, dead-air duration
+- [ ] User-perceived latency calculation (first-agent-audio minus
+      user-speech-end)
+- [ ] A governed metric catalog + drag/resize dashboard builder (today's
+      dashboard is a fixed static page, not user-customizable)
+
+**Milestone 4 -- Multi-agent analysis: not started**
+- [ ] Agent-to-agent dependency graph (spans already carry `parentSpanId`;
+      nothing visualizes the resulting graph yet)
+- [ ] Critical-path / handoff latency calculation across agents
+- [ ] Cost per workflow step
+
+**Milestone 5 -- Optimization: not started**
+- [ ] Model-substitution / cost-quality trade-off analysis
+- [ ] Retry-waste and context-window-waste detection (the `error_rate_high`
+      alert flags symptoms today; it doesn't recommend a fix)
+- [ ] Cache-opportunity analysis
+- [ ] Cost-per-successful-outcome (needs an explicit outcome signal, which
+      nothing currently reports)
+
+**Known gaps found while building Milestone 1** (fix-as-you-go, not blocking):
+- Sessions ingested purely via OTLP (no lifecycle markers) always show
+  `status: open` -- there's no span-count/gap-based heuristic yet to close
+  them out the way the embedded SDK's `SESSION_END` does.
+- `RootCauseAnalyzer`'s cost-spike/error-rate/latency thresholds are sane
+  defaults, not tuned against real production traffic volume.
+
 ## 🤖 AI Agent Integration (Future Feature)
 
 ### Intelligent Cost Optimization Agents

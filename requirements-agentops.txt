@@ -1,0 +1,6 @@
+# Optional dependencies for `finops agentops serve` (agent tracing / cost / RCA dashboard).
+# Everything else in this package (embedded SDK usage without the server) needs
+# no extra dependencies beyond the Python standard library.
+fastapi>=0.100.0
+uvicorn>=0.23.0
+requests>=2.28.0

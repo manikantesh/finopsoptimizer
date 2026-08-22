@@ -56,7 +56,8 @@ setup(
         'azure': ['azure-mgmt-resource'],
         'gcp': ['google-cloud-resource-manager'],
         'oracle': [],
-        'all': ['boto3', 'azure-mgmt-resource', 'google-cloud-resource-manager']
+        'all': ['boto3', 'azure-mgmt-resource', 'google-cloud-resource-manager'],
+        'agentops': ['fastapi>=0.100.0', 'uvicorn>=0.23.0', 'requests>=2.28.0'],
     },
     entry_points={
         "console_scripts": [
@@ -66,6 +67,7 @@ setup(
     include_package_data=True,
     package_data={
         "finops": ["*.yml", "*.yaml", "*.json"],
+        "finops.agentops": ["static/*.html"],
     },
     keywords="finops, cloud, cost, optimization, aws, azure, gcp, cost-management",
     zip_safe=False,

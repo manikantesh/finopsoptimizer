@@ -12,15 +12,29 @@ from pathlib import Path
 from datetime import datetime, timedelta
 import json
 
-from finops import (
-    FinOpsOptimizer, 
-    DataIngestionPipeline,
-    VMRightsizingAnalyzer,
-    CostOptimizationScheduler,
-    UnattachedDisksRemediator,
-    ReservedInstanceAnalyzer
-)
 from finops.config import load_config
+
+
+class _LazyFinopsClass:
+    """Defers ``import finops`` (and its pandas/boto3/azure/gcp deps) until a
+    multi-cloud command actually constructs one of these classes -- so
+    lightweight commands like ``finops agentops serve`` never pay for it."""
+
+    def __init__(self, attr_name):
+        self._attr_name = attr_name
+
+    def __call__(self, *args, **kwargs):
+        import finops
+        cls = getattr(finops, self._attr_name)
+        return cls(*args, **kwargs)
+
+
+FinOpsOptimizer = _LazyFinopsClass("FinOpsOptimizer")
+DataIngestionPipeline = _LazyFinopsClass("DataIngestionPipeline")
+VMRightsizingAnalyzer = _LazyFinopsClass("VMRightsizingAnalyzer")
+CostOptimizationScheduler = _LazyFinopsClass("CostOptimizationScheduler")
+UnattachedDisksRemediator = _LazyFinopsClass("UnattachedDisksRemediator")
+ReservedInstanceAnalyzer = _LazyFinopsClass("ReservedInstanceAnalyzer")
 
 
 @click.group()
@@ -901,5 +915,88 @@ def init(ctx, output):
         sys.exit(1)
 
 
+@cli.group()
+def agentops():
+    """Agent observability: trace AI agent sessions, cost, and get root-cause alerts.
+
+    Needs the optional 'agentops' extra: pip install -e '.[agentops]'
+    (or -r requirements-agentops.txt).
+    """
+    pass
+
+
+@agentops.command('serve')
+@click.option('--host', default=None, help='Bind host (default 127.0.0.1)')
+@click.option('--port', default=None, type=int, help='Bind port (default 8787)')
+@click.option('--db-path', default=None, help='SQLite file for traces/cost/alerts (default agentops_data/agentops.db)')
+def agentops_serve(host, port, db_path):
+    """Start the AgentOps ingestion API + live ops-wall dashboard."""
+    try:
+        import uvicorn
+        from finops.agentops import DEFAULT_DB_PATH, DEFAULT_HOST, DEFAULT_PORT, TraceStore
+        from finops.agentops.server import create_app
+    except ImportError as exc:
+        click.echo(f"Error: {exc}", err=True)
+        click.echo("Install the agentops extra: pip install -e '.[agentops]'", err=True)
+        sys.exit(1)
+
+    host = host or DEFAULT_HOST
+    port = port or DEFAULT_PORT
+    db_path = db_path or DEFAULT_DB_PATH
+
+    store = TraceStore(db_path)
+    app = create_app(store)
+
+    click.echo(f"AgentOps dashboard:  http://{host}:{port}/")
+    click.echo(f"OTLP trace ingest:   http://{host}:{port}/v1/traces")
+    click.echo(f"Trace store:         {db_path}")
+    uvicorn.run(app, host=host, port=port)
+
+
+@agentops.command('demo')
+@click.option('--db-path', default=None, help='SQLite file to write demo data into (default agentops_data/agentops.db)')
+@click.option('--server-url', default=None, help='Send events to a running "finops agentops serve" instead of writing locally')
+def agentops_demo(db_path, server_url):
+    """Send a few minutes of realistic sample traffic so there's something to see immediately."""
+    try:
+        from finops.agentops import AgentSession, DEFAULT_DB_PATH, TraceStore
+    except ImportError as exc:
+        click.echo(f"Error: {exc}", err=True)
+        click.echo("Install the agentops extra: pip install -e '.[agentops]'", err=True)
+        sys.exit(1)
+
+    db_path = db_path or DEFAULT_DB_PATH
+    if server_url:
+        kwargs = {"server_url": server_url}
+    else:
+        kwargs = {"store": TraceStore(db_path)}
+
+    sample_turns = [
+        ("what's my account balance?", "lookup_balance", True),
+        ("can you reset my password?", "reset_password", True),
+        ("why was I charged twice?", "lookup_charges", False),
+    ]
+
+    for i, (question, tool, tool_ok) in enumerate(sample_turns):
+        with AgentSession(agent_id="demo-support-agent", channel="voice", **kwargs) as session:
+            with session.turn(user_input=question) as turn:
+                turn.log_tool_call(name=tool, ok=tool_ok)
+                turn.log_llm_call(
+                    model="claude-sonnet-5",
+                    input_tokens=180 + i * 40,
+                    output_tokens=64 + i * 10,
+                    latency_ms=380 + i * 120,
+                )
+                if not tool_ok:
+                    turn.log_error("tool call failed: charges lookup timed out", error_type="ToolTimeout")
+
+    click.echo(f"Sent {len(sample_turns)} demo sessions.")
+    if server_url:
+        click.echo(f"View them at {server_url}/")
+    else:
+        click.echo(f"Wrote them to {db_path}.")
+        click.echo("Run 'finops agentops serve' (same --db-path) to view the live dashboard.")
+
+
 if __name__ == '__main__':
-    cli() 
+    cli()
