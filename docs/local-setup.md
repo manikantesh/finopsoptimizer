@@ -461,8 +461,8 @@ tail -f finops.log
 5. **Explore Examples**: Check the `examples/` directory
 
 ### Production Deployment
-- See the [Web Dashboard Guide](web-dashboard.md) for running the dashboard persistently
-- Configure monitoring and alerting (see [Monitoring](monitoring.md))
+- See [Deployment Guide](deployment.md) for production setup
+- Configure monitoring and alerting
 - Set up automated backups
 - Implement security best practices
 

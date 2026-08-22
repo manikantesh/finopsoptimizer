@@ -72,11 +72,6 @@ Command-line interface documentation and examples.
 
 Guide to using the web dashboard for cost monitoring and optimization.
 
-### [Agent Observability (AgentOps)](agent-observability.md)
-
-Trace AI agent sessions and get per-call token cost with zero external
-database -- OpenTelemetry-only ingestion, `pip install -e '.[agentops]'`.
-
 ### [Security Guide](security.md)
 
 Security best practices and configuration.
